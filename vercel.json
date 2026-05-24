@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/vocabulary.js": {
+      "maxDuration": 10
+    }
+  }
+}

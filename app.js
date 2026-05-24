@@ -1,5 +1,6 @@
 const storageKey = "englishThroughProjects";
 const themeKey = "englishThroughProjectsTheme";
+const onlineVocabularyEndpoint = "https://english-through-projects.vercel.app/api/vocabulary";
 const todayKey = new Date().toISOString().slice(0, 10);
 
 let words = [];
@@ -50,6 +51,7 @@ const defaultState = {
   cardIndex: 0,
   knownCards: [],
   userWords: [],
+  pendingSyncWords: [],
   dailySentence: "",
   musicNotes: "",
   generalNotes: "",
@@ -118,11 +120,17 @@ function loadState() {
       cardIndex: saved.cardIndex || 0,
       knownCards: saved.knownCards || [],
       userWords: saved.userWords || [],
+      pendingSyncWords: saved.pendingSyncWords || [],
       generalNotes: saved.generalNotes || "",
     };
   }
 
-  return { ...defaultState, ...saved, userWords: saved.userWords || [] };
+  return {
+    ...defaultState,
+    ...saved,
+    userWords: saved.userWords || [],
+    pendingSyncWords: saved.pendingSyncWords || [],
+  };
 }
 
 function saveState(message) {
@@ -487,6 +495,35 @@ function addWord() {
 
   state.wordIndex = words.length - 1;
   saveState("Word added to your local vocabulary");
+  syncVocabularyWord(newWord);
+}
+
+async function syncVocabularyWord(word) {
+  try {
+    const response = await fetch(onlineVocabularyEndpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(word),
+    });
+    const result = await response.json();
+
+    if (!response.ok || !result.ok) {
+      throw new Error(result.message || "Online sync failed");
+    }
+
+    showToast("Word synced with Notion");
+  } catch (error) {
+    const alreadyPending = state.pendingSyncWords.some(
+      (pendingWord) => pendingWord.term.toLowerCase() === word.term.toLowerCase(),
+    );
+
+    if (!alreadyPending) {
+      state.pendingSyncWords.push(word);
+      localStorage.setItem(storageKey, JSON.stringify(state));
+    }
+
+    showToast("Saved locally. Notion sync pending.");
+  }
 }
 
 function exportVocabulary() {

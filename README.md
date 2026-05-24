@@ -37,6 +37,7 @@ As palavras adicionadas pelo botao `Add Word` ficam salvas no `localStorage` do 
 - Aba Reading com `Listen` e `Record voice` para comparar sua fala com o texto.
 - Layout responsivo com grids fluidos, tema claro/escuro e titulos com gradiente colorido.
 - Fundo visual inspirado nos temas do projeto: ingles, codigo, GIS, oceano, musica e pesquisa.
+- Integracao preparada com Vercel `/api/vocabulary` e Notion, mantendo fallback local.
 
 ## Rotina minima diaria
 
