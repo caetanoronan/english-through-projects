@@ -30,6 +30,7 @@ As palavras adicionadas pelo botao `Add Word` ficam salvas no `localStorage` do 
 - Botao `Add Word` para adicionar palavras pessoais.
 - Exportacao e importacao do vocabulario pessoal em JSON.
 - Aba `Vocabulary Bank` com busca, filtro por tema e tabela de referencia do vocabulario.
+- Links no `Vocabulary Bank` para abrir o banco Notion, pesquisar no Cambridge Dictionary e buscar no Google.
 - Flashcards gerados automaticamente a partir do `Vocabulary Bank`.
 - Sugestao simples de correcao comparando a palavra digitada com o vocabulario existente.
 - Leitura em voz alta com a Web Speech API do navegador.

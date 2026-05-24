@@ -257,6 +257,7 @@ function renderVocabularyBank() {
   });
 
   document.querySelector("#vocabularyCount").textContent = `${filteredWords.length} words`;
+  renderDictionaryLinks(search);
 
   filteredWords.forEach((word) => {
     const row = document.createElement("tr");
@@ -274,6 +275,21 @@ function renderVocabularyBank() {
 
     tableBody.append(row);
   });
+}
+
+function renderDictionaryLinks(search) {
+  const cambridgeLink = document.querySelector("#dictionarySearchLink");
+  const googleLink = document.querySelector("#googleSearchLink");
+  const query = search || normalizeForSpeech(document.querySelector("#vocabularySearch").value);
+
+  if (!query) {
+    cambridgeLink.href = "https://dictionary.cambridge.org/pt/dicionario/ingles/";
+    googleLink.href = "https://www.google.com/search?q=English+dictionary";
+    return;
+  }
+
+  cambridgeLink.href = `https://dictionary.cambridge.org/pt/dicionario/ingles/${encodeURIComponent(query)}`;
+  googleLink.href = `https://www.google.com/search?q=${encodeURIComponent(`${query} meaning in English`)}`;
 }
 
 function syncVocabularyFilter(filter, themes, selectedTheme) {

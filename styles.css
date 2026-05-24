@@ -616,7 +616,8 @@ label textarea {
 
 .primary-button,
 .secondary-button,
-.file-button {
+.file-button,
+.link-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -627,6 +628,7 @@ label textarea {
   cursor: pointer;
   font-weight: 900;
   text-align: center;
+  text-decoration: none;
   transition:
     background-color 160ms ease,
     border-color 160ms ease,
@@ -642,7 +644,8 @@ label textarea {
 }
 
 .secondary-button,
-.file-button {
+.file-button,
+.link-button {
   border: 1px solid var(--line);
   background: var(--panel);
   color: var(--accent-strong);
@@ -650,7 +653,8 @@ label textarea {
 
 .primary-button:hover,
 .secondary-button:hover,
-.file-button:hover {
+.file-button:hover,
+.link-button:hover {
   transform: translateY(-1px);
   box-shadow: 0 10px 24px rgba(23, 32, 51, 0.12);
 }
@@ -661,13 +665,15 @@ label textarea {
 }
 
 .secondary-button:hover,
-.file-button:hover {
+.file-button:hover,
+.link-button:hover {
   border-color: var(--accent);
   background: var(--accent-soft);
 }
 
 :root[data-theme="dark"] .secondary-button,
-:root[data-theme="dark"] .file-button {
+:root[data-theme="dark"] .file-button,
+:root[data-theme="dark"] .link-button {
   color: #d9fbe4;
 }
 
