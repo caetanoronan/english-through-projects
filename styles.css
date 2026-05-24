@@ -284,7 +284,7 @@ main {
 .routine-grid,
 .home-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: clamp(14px, 1.8vw, 24px);
   margin-bottom: clamp(20px, 2.4vw, 34px);
 }
@@ -303,7 +303,7 @@ main {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  min-height: clamp(118px, 12vw, 150px);
+  min-height: clamp(112px, 10vw, 136px);
   padding: clamp(18px, 2.4vw, 28px);
   cursor: pointer;
 }
@@ -322,7 +322,7 @@ main {
 }
 
 .home-grid {
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: clamp(14px, 2vw, 24px);
 }
 
@@ -355,18 +355,27 @@ main {
   margin-bottom: clamp(18px, 2vw, 28px);
 }
 
-.feature-card > p,
-.feature-card .example,
-.feature-card textarea,
-.feature-card .lyrics-box,
-.feature-card .speech-panel {
-  max-width: 860px;
+.feature-card > p {
+  max-width: 920px;
 }
 
-.feature-card .form-grid,
+.feature-card .example,
+.feature-card .lyrics-box,
+.feature-card .speech-panel {
+  max-width: 940px;
+}
+
+.feature-card textarea {
+  max-width: 980px;
+}
+
+.feature-card .form-grid {
+  max-width: 1080px;
+}
+
 .feature-card .button-row,
 .feature-card .word-row {
-  max-width: 980px;
+  max-width: 1040px;
 }
 
 .add-word-card {
@@ -486,8 +495,35 @@ main {
 
 .vocabulary-table {
   width: 100%;
-  min-width: 980px;
+  min-width: 1040px;
+  table-layout: fixed;
   border-collapse: collapse;
+}
+
+.vocabulary-table th:nth-child(1),
+.vocabulary-table td:nth-child(1) {
+  width: 14%;
+}
+
+.vocabulary-table th:nth-child(2),
+.vocabulary-table td:nth-child(2),
+.vocabulary-table th:nth-child(3),
+.vocabulary-table td:nth-child(3) {
+  width: 13%;
+}
+
+.vocabulary-table th:nth-child(4),
+.vocabulary-table td:nth-child(4),
+.vocabulary-table th:nth-child(5),
+.vocabulary-table td:nth-child(5) {
+  width: 23%;
+}
+
+.vocabulary-table th:nth-child(6),
+.vocabulary-table td:nth-child(6),
+.vocabulary-table th:nth-child(7),
+.vocabulary-table td:nth-child(7) {
+  width: 7%;
 }
 
 .vocabulary-table th,
@@ -512,6 +548,7 @@ main {
 .vocabulary-table td {
   font-size: 0.95rem;
   line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
 .vocabulary-table tr:last-child td {
@@ -546,7 +583,7 @@ main {
 
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
   gap: clamp(14px, 2vw, 22px);
   margin-bottom: clamp(14px, 2vw, 22px);
 }
@@ -711,6 +748,44 @@ label textarea {
 
   .form-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 980px) {
+  #word .feature-card:first-of-type,
+  #reading .feature-card,
+  #flashcards .feature-card,
+  #music .feature-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+    column-gap: clamp(24px, 4vw, 56px);
+    align-items: start;
+  }
+
+  #word .feature-card:first-of-type .word-row,
+  #reading .feature-card h3,
+  #flashcards .feature-card .card-label,
+  #music .feature-card .word-row {
+    grid-column: 1 / -1;
+  }
+
+  #word .feature-card:first-of-type .button-row,
+  #reading .feature-card .button-row,
+  #flashcards .feature-card .button-row,
+  #music .feature-card .button-row,
+  #music .feature-card textarea,
+  #music .feature-card > button {
+    grid-column: 2;
+  }
+
+  #reading .feature-card .speech-panel,
+  #music .feature-card .lyrics-box {
+    grid-column: 1;
+  }
+
+  #sentence .feature-card,
+  #notes .feature-card {
+    max-width: 980px;
   }
 }
 
