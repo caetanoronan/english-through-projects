@@ -154,8 +154,9 @@ p {
 h1 {
   max-width: 980px;
   margin-bottom: 0;
-  font-size: clamp(2.35rem, 7vw, 5.4rem);
-  line-height: 0.95;
+  font-size: clamp(2rem, 5.1vw, 4.25rem);
+  line-height: 1;
+  white-space: nowrap;
 }
 
 h2 {
@@ -206,12 +207,13 @@ h3 {
 
 .tabs {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   width: min(95vw, 1240px);
   max-width: none;
   margin: 0 auto;
   padding: 0 0 clamp(14px, 2vw, 20px);
-  overflow-x: auto;
+  overflow-x: visible;
 }
 
 .tab {
@@ -225,12 +227,22 @@ h3 {
   font-weight: 800;
   white-space: nowrap;
   backdrop-filter: blur(16px);
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
 }
 
-.tab.is-active {
+.tab.is-active,
+.tab:hover {
   border-color: var(--accent);
   background: var(--accent);
   color: #ffffff;
+}
+
+.tab:hover {
+  transform: translateY(-1px);
 }
 
 main {
@@ -246,6 +258,19 @@ main {
 
 .tab-panel.is-active {
   display: block;
+  animation: panelFadeIn 220ms ease;
+}
+
+@keyframes panelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .section-heading {
@@ -256,7 +281,8 @@ main {
 .home-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: clamp(14px, 2vw, 24px);
+  gap: clamp(14px, 1.8vw, 24px);
+  margin-bottom: clamp(20px, 2.4vw, 34px);
 }
 
 .routine-item,
@@ -321,6 +347,7 @@ main {
   max-width: min(100%, 940px);
   padding: clamp(22px, 3vw, 42px);
   background: var(--panel-2);
+  margin-bottom: clamp(18px, 2vw, 28px);
 }
 
 .add-word-card {
@@ -462,6 +489,12 @@ label textarea {
   cursor: pointer;
   font-weight: 900;
   text-align: center;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .primary-button {
@@ -475,6 +508,24 @@ label textarea {
   border: 1px solid var(--line);
   background: var(--panel);
   color: var(--accent-strong);
+}
+
+.primary-button:hover,
+.secondary-button:hover,
+.file-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(23, 32, 51, 0.12);
+}
+
+.primary-button:hover {
+  border-color: var(--accent-strong);
+  background: var(--accent-strong);
+}
+
+.secondary-button:hover,
+.file-button:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
 }
 
 :root[data-theme="dark"] .secondary-button,
@@ -528,6 +579,10 @@ label textarea {
 }
 
 @media (max-width: 760px) {
+  h1 {
+    white-space: normal;
+  }
+
   .app-header {
     align-items: flex-start;
     flex-direction: column;
