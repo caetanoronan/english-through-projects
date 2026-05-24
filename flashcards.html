@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech & Bio Flashcards</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        /* Container do Flashcard com perspectiva 3D */
+        .flashcard-container {
+            background-color: transparent;
+            width: 350px;
+            height: 250px;
+            perspective: 1000px;
+            margin-bottom: 30px;
+            cursor: pointer;
+        }
+
+        /* O cartão em si, que vai girar */
+        .flashcard {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+
+        /* Classe acionada pelo JavaScript para girar 180 graus */
+        .flashcard.is-flipped {
+            transform: rotateY(180deg);
+        }
+
+        /* Estilo das faces (Frente e Verso) */
+        .flashcard-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Safari */
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Face da Frente (Inglês) */
+        .flashcard-front {
+            background-color: #ffffff;
+            color: #2980b9;
+        }
+
+        /* Face de Trás (Português) */
+        .flashcard-back {
+            background-color: #2980b9;
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .word {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .context {
+            font-size: 14px;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2ecc71;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Treino de Vocabulário Diário</h2>
+
+    <div class="flashcard-container" onclick="flipCard()">
+        <div class="flashcard" id="myCard">
+            <div class="flashcard-face flashcard-front">
+                <div class="context" id="context-en">Category</div>
+                <div class="word" id="word-en">Word</div>
+                <div style="font-size: 12px; margin-top: 20px; color: #7f8c8d;">Clique para virar</div>
+            </div>
+            <div class="flashcard-face flashcard-back">
+                <div class="context" id="context-pt">Categoria</div>
+                <div class="word" id="word-pt">Tradução</div>
+            </div>
+        </div>
+    </div>
+
+    <button onclick="nextCard()">Próxima Palavra ➔</button>
+
+    <script>
+        // 1. O seu Banco de Dados Personalizado (Array de Objetos)
+        // Aqui você insere o vocabulário que faz sentido para o seu dia a dia!
+        const vocabulary = [
+            { en: "Coordinate Reference System (CRS)", pt: "Sistema de Referência de Coordenadas (SRC)", context: "Geoprocessing / QGIS" },
+            { en: "Seaweed / Macroalgae", pt: "Alga Marinha / Macroalga", context: "Marine Biology" },
+            { en: "Sheet Music", pt: "Partitura", context: "Music Theory" },
+            { en: "Mangrove swamp", pt: "Manguezal", context: "Ecology" },
+            { en: "Raster processing", pt: "Processamento de dados Raster", context: "GIS / Scripting" },
+            { en: "Slide position", pt: "Posição da vara (Trombone)", context: "Music Practice" },
+            { en: "Remote Sensing", pt: "Sensoriamento Remoto", context: "Aerophotogrammetry" }
+        ];
+
+        let currentIndex = 0;
+
+        // Função para carregar a palavra atual na tela
+        function loadCard() {
+            const cardData = vocabulary[currentIndex];
+            
+            document.getElementById("word-en").innerText = cardData.en;
+            document.getElementById("context-en").innerText = cardData.context;
+            
+            document.getElementById("word-pt").innerText = cardData.pt;
+            document.getElementById("context-pt").innerText = "Tradução";
+            
+            // Garante que o cartão comece mostrando a frente
+            document.getElementById("myCard").classList.remove("is-flipped");
+        }
+
+        // Função para virar o cartão (acionada pelo clique)
+        function flipCard() {
+            document.getElementById("myCard").classList.toggle("is-flipped");
+        }
+
+        // Função para sortear a próxima palavra
+        function nextCard() {
+            // Sorteia um número aleatório dentro do tamanho do array
+            currentIndex = Math.floor(Math.random() * vocabulary.length);
+            loadCard();
+        }
+
+        // Inicia o app carregando a primeira carta aleatória
+        window.onload = nextCard;
+    </script>
+
+</body>
+</html>

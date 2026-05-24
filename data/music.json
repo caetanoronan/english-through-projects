@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Coastal Morning",
+    "style": "Folk / acoustic",
+    "focus": "Clear vowels and slow rhythm",
+    "lines": [
+      "I walk beside the water",
+      "The morning tide is low",
+      "I listen to the shoreline",
+      "And let the rhythm flow"
+    ],
+    "vocabulary": ["shoreline", "tide", "rhythm", "flow"]
+  },
+  {
+    "title": "Mangrove Groove",
+    "style": "Brazilian groove / funk",
+    "focus": "Stress and syncopation",
+    "lines": [
+      "Roots in the water",
+      "Birds in the sky",
+      "Life in the mangrove",
+      "Moving with the tide"
+    ],
+    "vocabulary": ["roots", "mangrove", "moving", "tide"]
+  },
+  {
+    "title": "Data Blues",
+    "style": "Blues",
+    "focus": "Final consonants and phrasing",
+    "lines": [
+      "I clean my dataset",
+      "I check every row",
+      "The pattern gets clearer",
+      "The more I know"
+    ],
+    "vocabulary": ["dataset", "row", "pattern", "clearer"]
+  },
+  {
+    "title": "Trombone Air",
+    "style": "Slow jazz",
+    "focus": "Breath control and connected speech",
+    "lines": [
+      "Breathe in slowly",
+      "Shape every tone",
+      "Leave a little silence",
+      "Then make it your own"
+    ],
+    "vocabulary": ["breathe", "shape", "tone", "silence"]
+  }
+]

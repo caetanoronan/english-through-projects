@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Coastal Monitoring",
+    "text": "Coastal monitoring combines field observations, satellite imagery, and spatial analysis to understand how shorelines change over time."
+  },
+  {
+    "title": "Marine Biodiversity",
+    "text": "Marine biodiversity studies describe how species interact with habitats, environmental gradients, and human pressure."
+  },
+  {
+    "title": "Clean Code",
+    "text": "Readable code helps future collaborators understand the purpose of a function, the structure of the data, and the expected result."
+  },
+  {
+    "title": "Musical Phrasing",
+    "text": "Musical phrasing is the way a player shapes notes, silences, accents, and breathing to create meaning."
+  },
+  {
+    "title": "Reading an Abstract",
+    "text": "An abstract usually presents the research problem, the methods, the main findings, and the conclusion in a compact form."
+  },
+  {
+    "title": "Working With Maps",
+    "text": "A good map uses clear layers, readable labels, a consistent coordinate system, and a legend that supports interpretation."
+  },
+  {
+    "title": "Database Thinking",
+    "text": "A database stores information in a structured way so that queries can retrieve, filter, compare, and update records."
+  },
+  {
+    "title": "Listening Through Music",
+    "text": "Music lessons in English train vocabulary, rhythm, pronunciation, and attention to stress patterns without feeling like formal study."
+  }
+]

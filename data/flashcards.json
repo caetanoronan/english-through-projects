@@ -1,0 +1,52 @@
+[
+  {
+    "front": "sampling",
+    "back": "Amostragem: the process of selecting observations or locations for analysis.",
+    "category": "Research"
+  },
+  {
+    "front": "query",
+    "back": "Consulta: a request for information from a database or search system.",
+    "category": "SQL"
+  },
+  {
+    "front": "layer",
+    "back": "Camada: a set of spatial features displayed in a GIS project.",
+    "category": "GIS"
+  },
+  {
+    "front": "groove",
+    "back": "Levada: the rhythmic feel or pulse that makes music move.",
+    "category": "Music"
+  },
+  {
+    "front": "shoreline",
+    "back": "Linha de costa: the line where land and water meet.",
+    "category": "Coastal GIS"
+  },
+  {
+    "front": "abstract",
+    "back": "Resumo cientifico: a short summary of a scientific paper.",
+    "category": "Academic English"
+  },
+  {
+    "front": "commit",
+    "back": "A saved snapshot of changes in a Git project.",
+    "category": "GitHub"
+  },
+  {
+    "front": "orthomosaic",
+    "back": "A corrected image made by combining many aerial photos.",
+    "category": "Geotechnology"
+  },
+  {
+    "front": "breath control",
+    "back": "The ability to manage airflow while singing or playing a wind instrument.",
+    "category": "Music"
+  },
+  {
+    "front": "species richness",
+    "back": "The number of different species in a place.",
+    "category": "Ecology"
+  }
+]

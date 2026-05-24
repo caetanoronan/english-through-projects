@@ -1,0 +1,282 @@
+[
+  {
+    "term": "dataset",
+    "tag": "Programming",
+    "meaning": "A structured collection of data used for analysis.",
+    "translation": "conjunto de dados",
+    "example": "This dataset contains shoreline measurements from 2024."
+  },
+  {
+    "term": "variable",
+    "tag": "Programming",
+    "meaning": "A named value that can change while a program runs.",
+    "translation": "variavel",
+    "example": "The variable stores the sampling depth."
+  },
+  {
+    "term": "function",
+    "tag": "Programming",
+    "meaning": "A reusable block of code that performs a specific task.",
+    "translation": "funcao",
+    "example": "This function calculates the average water temperature."
+  },
+  {
+    "term": "loop",
+    "tag": "Programming",
+    "meaning": "A structure that repeats a set of instructions.",
+    "translation": "laco de repeticao",
+    "example": "The loop processes each row in the table."
+  },
+  {
+    "term": "query",
+    "tag": "SQL",
+    "meaning": "A request for data from a database or search system.",
+    "translation": "consulta",
+    "example": "The SQL query selects all records from the monitoring station."
+  },
+  {
+    "term": "repository",
+    "tag": "GitHub",
+    "meaning": "A place where project files and version history are stored.",
+    "translation": "repositorio",
+    "example": "The repository includes the HTML, CSS, and JavaScript files."
+  },
+  {
+    "term": "commit",
+    "tag": "GitHub",
+    "meaning": "A saved snapshot of changes in a Git project.",
+    "translation": "registro de alteracao",
+    "example": "I made a commit after adding the vocabulary file."
+  },
+  {
+    "term": "branch",
+    "tag": "GitHub",
+    "meaning": "A separate line of development in a Git repository.",
+    "translation": "ramificacao",
+    "example": "Create a new branch before testing the feature."
+  },
+  {
+    "term": "shoreline",
+    "tag": "Coastal GIS",
+    "meaning": "The line where land and water meet.",
+    "translation": "linha de costa",
+    "example": "The shoreline moved after several storm events."
+  },
+  {
+    "term": "watershed",
+    "tag": "Geography",
+    "meaning": "An area of land where water drains into a common outlet.",
+    "translation": "bacia hidrografica",
+    "example": "The watershed connects rivers, wetlands, and coastal ecosystems."
+  },
+  {
+    "term": "estuary",
+    "tag": "Oceanography",
+    "meaning": "A coastal area where freshwater mixes with seawater.",
+    "translation": "estuario",
+    "example": "The estuary supports fish nurseries and mangrove forests."
+  },
+  {
+    "term": "tide",
+    "tag": "Oceanography",
+    "meaning": "The regular rise and fall of sea level.",
+    "translation": "mare",
+    "example": "Low tide exposed the rocky shore."
+  },
+  {
+    "term": "current",
+    "tag": "Oceanography",
+    "meaning": "A continuous movement of water in a specific direction.",
+    "translation": "corrente",
+    "example": "The current carried floating algae toward the bay."
+  },
+  {
+    "term": "salinity",
+    "tag": "Oceanography",
+    "meaning": "The amount of dissolved salt in water.",
+    "translation": "salinidade",
+    "example": "Salinity changes quickly near river mouths."
+  },
+  {
+    "term": "turbidity",
+    "tag": "Oceanography",
+    "meaning": "The cloudiness of water caused by suspended particles.",
+    "translation": "turbidez",
+    "example": "High turbidity reduced underwater visibility."
+  },
+  {
+    "term": "mangrove",
+    "tag": "Marine Biology",
+    "meaning": "A coastal forest adapted to salty and flooded conditions.",
+    "translation": "manguezal",
+    "example": "The mangrove protects the coast from erosion."
+  },
+  {
+    "term": "macroalgae",
+    "tag": "Marine Biology",
+    "meaning": "Large algae visible without a microscope.",
+    "translation": "macroalgas",
+    "example": "Macroalgae provide shelter for small marine organisms."
+  },
+  {
+    "term": "species richness",
+    "tag": "Ecology",
+    "meaning": "The number of different species in a place.",
+    "translation": "riqueza de especies",
+    "example": "Species richness was higher in the protected area."
+  },
+  {
+    "term": "habitat",
+    "tag": "Ecology",
+    "meaning": "The natural place where an organism lives.",
+    "translation": "habitat",
+    "example": "Rocky shores are an important habitat for many invertebrates."
+  },
+  {
+    "term": "sampling",
+    "tag": "Research",
+    "meaning": "The process of selecting observations, points, or organisms for analysis.",
+    "translation": "amostragem",
+    "example": "The sampling strategy covered mangrove and rocky shore habitats."
+  },
+  {
+    "term": "survey",
+    "tag": "Research",
+    "meaning": "A systematic collection of information from a site or group.",
+    "translation": "levantamento",
+    "example": "The field survey recorded species and substrate type."
+  },
+  {
+    "term": "methodology",
+    "tag": "Research",
+    "meaning": "The organized set of methods used in a study.",
+    "translation": "metodologia",
+    "example": "The methodology explains how the samples were collected."
+  },
+  {
+    "term": "abstract",
+    "tag": "Academic English",
+    "meaning": "A short summary of a scientific paper.",
+    "translation": "resumo cientifico",
+    "example": "Read the abstract before reading the full article."
+  },
+  {
+    "term": "findings",
+    "tag": "Academic English",
+    "meaning": "The main results or discoveries from a study.",
+    "translation": "resultados",
+    "example": "The findings suggest a decline in water quality."
+  },
+  {
+    "term": "evidence",
+    "tag": "Academic English",
+    "meaning": "Information that supports an idea or conclusion.",
+    "translation": "evidencia",
+    "example": "The satellite images provide evidence of coastal erosion."
+  },
+  {
+    "term": "layer",
+    "tag": "GIS",
+    "meaning": "A set of spatial features displayed in a map project.",
+    "translation": "camada",
+    "example": "The vegetation layer is displayed above the elevation model."
+  },
+  {
+    "term": "buffer",
+    "tag": "GIS",
+    "meaning": "An area created around a spatial feature at a defined distance.",
+    "translation": "area de influencia",
+    "example": "A 50-meter buffer was created around the river."
+  },
+  {
+    "term": "coordinate system",
+    "tag": "GIS",
+    "meaning": "A reference system used to locate points on Earth.",
+    "translation": "sistema de coordenadas",
+    "example": "The map uses the same coordinate system as the GPS data."
+  },
+  {
+    "term": "raster",
+    "tag": "GIS",
+    "meaning": "Spatial data represented as a grid of cells or pixels.",
+    "translation": "raster",
+    "example": "The raster shows sea surface temperature."
+  },
+  {
+    "term": "vector",
+    "tag": "GIS",
+    "meaning": "Spatial data represented by points, lines, or polygons.",
+    "translation": "vetor",
+    "example": "The vector file contains the boundaries of the study area."
+  },
+  {
+    "term": "remote sensing",
+    "tag": "Geotechnology",
+    "meaning": "The collection of information from satellites, aircraft, or drones.",
+    "translation": "sensoriamento remoto",
+    "example": "Remote sensing helps monitor coastal vegetation."
+  },
+  {
+    "term": "orthomosaic",
+    "tag": "Geotechnology",
+    "meaning": "A corrected image made by combining many aerial photos.",
+    "translation": "ortomosaico",
+    "example": "The orthomosaic was generated from drone images."
+  },
+  {
+    "term": "point cloud",
+    "tag": "Geotechnology",
+    "meaning": "A set of points representing the shape of a surface or object.",
+    "translation": "nuvem de pontos",
+    "example": "The point cloud was used to model the beach profile."
+  },
+  {
+    "term": "scale",
+    "tag": "Mapping",
+    "meaning": "The relationship between distance on a map and distance in the real world.",
+    "translation": "escala",
+    "example": "Choose a scale that shows the entire study area."
+  },
+  {
+    "term": "legend",
+    "tag": "Mapping",
+    "meaning": "A map element that explains symbols and colors.",
+    "translation": "legenda",
+    "example": "The legend identifies mangrove, sand, and water classes."
+  },
+  {
+    "term": "chord progression",
+    "tag": "Music",
+    "meaning": "A sequence of chords used as the harmonic base of a song.",
+    "translation": "progressao harmonica",
+    "example": "This chord progression creates a calm and reflective mood."
+  },
+  {
+    "term": "groove",
+    "tag": "Music",
+    "meaning": "The rhythmic feel or pulse that makes music move.",
+    "translation": "levada",
+    "example": "The groove becomes stronger when the bass and drums lock together."
+  },
+  {
+    "term": "phrasing",
+    "tag": "Music",
+    "meaning": "The way a musician shapes notes, pauses, and accents.",
+    "translation": "fraseado",
+    "example": "His phrasing sounds natural because he leaves space between ideas."
+  },
+  {
+    "term": "breath control",
+    "tag": "Music",
+    "meaning": "The ability to manage airflow while singing or playing a wind instrument.",
+    "translation": "controle de respiracao",
+    "example": "Breath control is essential for long trombone phrases."
+  },
+  {
+    "term": "improvisation",
+    "tag": "Music",
+    "meaning": "The act of creating music spontaneously while performing.",
+    "translation": "improvisacao",
+    "example": "Improvisation connects listening, technique, and musical memory."
+  }
+]

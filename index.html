@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>English Through Projects</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Daily English Hub</p>
+        <h1>English Through Projects</h1>
+      </div>
+      <div class="header-actions">
+        <button class="secondary-button theme-button" id="themeBtn" type="button">Dark mode</button>
+      </div>
+    </header>
+
+    <nav class="tabs" aria-label="Main sections">
+      <button class="tab is-active" type="button" data-tab="home">Home</button>
+      <button class="tab" type="button" data-tab="word">Word</button>
+      <button class="tab" type="button" data-tab="sentence">Sentence</button>
+      <button class="tab" type="button" data-tab="reading">Reading</button>
+      <button class="tab" type="button" data-tab="flashcards">Flashcards</button>
+      <button class="tab" type="button" data-tab="music">Music</button>
+      <button class="tab" type="button" data-tab="notes">Notes</button>
+    </nav>
+
+    <main>
+      <section class="tab-panel is-active" id="home">
+        <div class="section-heading">
+          <p class="eyebrow">Today</p>
+          <h2>Minimum daily routine</h2>
+        </div>
+
+        <div class="routine-grid">
+          <label class="routine-item">
+            <input type="checkbox" data-task="reading" />
+            <span>
+              <strong>5 min</strong>
+              Read a short technical text
+            </span>
+          </label>
+          <label class="routine-item">
+            <input type="checkbox" data-task="flashcards" />
+            <span>
+              <strong>5 min</strong>
+              Review useful flashcards
+            </span>
+          </label>
+          <label class="routine-item">
+            <input type="checkbox" data-task="music" />
+            <span>
+              <strong>10 min</strong>
+              Listen to a music lesson in English
+            </span>
+          </label>
+          <label class="routine-item">
+            <input type="checkbox" data-task="sentence" />
+            <span>
+              <strong>2 min</strong>
+              Write one sentence of your own
+            </span>
+          </label>
+        </div>
+
+        <div class="home-grid">
+          <article class="summary-card">
+            <span>Today's Word</span>
+            <strong id="homeWord">dataset</strong>
+          </article>
+          <article class="summary-card">
+            <span>Flashcards Due</span>
+            <strong id="homeDue">0</strong>
+          </article>
+          <article class="summary-card">
+            <span>Today's Focus</span>
+            <strong id="homeFocus">Research</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="word">
+        <div class="section-heading">
+          <p class="eyebrow">Vocabulary</p>
+          <h2>Today's Word</h2>
+        </div>
+        <article class="feature-card">
+          <div class="word-row">
+            <h3 id="wordText">dataset</h3>
+            <span id="wordTag">Programming</span>
+          </div>
+          <p id="wordMeaning">A structured collection of data used for analysis.</p>
+          <p class="translation" id="wordTranslation">conjunto de dados</p>
+          <p class="example" id="wordExample">This dataset contains shoreline measurements from 2024.</p>
+          <div class="button-row">
+            <button class="primary-button" type="button" id="newWordButton">New word</button>
+            <button class="secondary-button" type="button" id="speakWordButton">Listen</button>
+          </div>
+        </article>
+
+        <article class="feature-card add-word-card">
+          <h3>Add Word</h3>
+          <div class="form-grid">
+            <label>
+              English word
+              <input id="addTerm" type="text" list="knownWords" placeholder="e.g. coastline" />
+            </label>
+            <label>
+              Theme
+              <input id="addTag" type="text" placeholder="e.g. Coastal GIS" />
+            </label>
+            <label>
+              Meaning in English
+              <input id="addMeaning" type="text" placeholder="Short definition in English" />
+            </label>
+            <label>
+              Translation
+              <input id="addTranslation" type="text" placeholder="Portuguese meaning" />
+            </label>
+          </div>
+          <label>
+            Example sentence
+            <textarea id="addExample" rows="3" placeholder="The coastline changed after the storm."></textarea>
+          </label>
+          <p class="suggestion" id="wordSuggestion" aria-live="polite"></p>
+          <div class="button-row">
+            <button class="primary-button" type="button" id="addWordButton">Add word</button>
+            <button class="secondary-button" type="button" id="checkWordButton">Check spelling</button>
+          </div>
+          <datalist id="knownWords"></datalist>
+        </article>
+
+        <article class="feature-card add-word-card">
+          <h3>Backup Vocabulary</h3>
+          <p id="backupSummary">Personal words saved: 0</p>
+          <div class="button-row">
+            <button class="primary-button" type="button" id="exportWordsButton">Export vocabulary</button>
+            <label class="file-button" for="importWordsInput">Import vocabulary</label>
+            <input id="importWordsInput" class="visually-hidden" type="file" accept="application/json,.json" />
+          </div>
+        </article>
+      </section>
+
+      <section class="tab-panel" id="sentence">
+        <div class="section-heading">
+          <p class="eyebrow">Micro output</p>
+          <h2>Today's Sentence</h2>
+        </div>
+        <article class="feature-card">
+          <p id="sentencePrompt">Describe one task from your current project in English.</p>
+          <textarea id="dailySentence" rows="5" placeholder="Today I analyzed coastal mapping data..."></textarea>
+          <button class="primary-button" type="button" id="saveSentenceButton">Save sentence</button>
+        </article>
+      </section>
+
+      <section class="tab-panel" id="reading">
+        <div class="section-heading">
+          <p class="eyebrow">5-minute reading</p>
+          <h2>Quick Reading</h2>
+        </div>
+        <article class="feature-card">
+          <h3 id="readingTitle">Coastal Monitoring</h3>
+          <p id="readingText">
+            Coastal monitoring combines field observations, satellite imagery, and spatial analysis to understand how shorelines change over time.
+          </p>
+          <div class="button-row">
+            <button class="primary-button" type="button" id="newReadingButton">New reading</button>
+            <button class="secondary-button" type="button" id="speakReadingButton">Listen</button>
+            <button class="secondary-button" type="button" id="recordReadingButton">Record voice</button>
+          </div>
+          <div class="speech-panel">
+            <span>Your speech</span>
+            <p id="speechResult">Press Record voice and read the text aloud.</p>
+            <strong id="speechScore">Match score: --</strong>
+          </div>
+        </article>
+      </section>
+
+      <section class="tab-panel" id="flashcards">
+        <div class="section-heading">
+          <p class="eyebrow">SRS starter</p>
+          <h2>Flashcards Due</h2>
+        </div>
+        <article class="feature-card flashcard">
+          <p class="card-label" id="cardCategory">GIS</p>
+          <h3 id="cardFront">sampling</h3>
+          <p id="cardBack" hidden>Amostragem: the process of selecting observations or locations for analysis.</p>
+          <div class="button-row">
+            <button class="secondary-button" type="button" id="speakCardButton">Listen</button>
+            <button class="secondary-button" type="button" id="showAnswerButton">Show answer</button>
+            <button class="primary-button" type="button" id="knownButton">I knew it</button>
+            <button class="secondary-button" type="button" id="reviewButton">Review again</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="tab-panel" id="music">
+        <div class="section-heading">
+          <p class="eyebrow">Listening</p>
+          <h2>Music Practice</h2>
+        </div>
+        <article class="feature-card">
+          <div class="word-row">
+            <h3 id="musicTitle">Coastal Morning</h3>
+            <span id="musicStyle">Folk / acoustic</span>
+          </div>
+          <p id="musicFocus">Clear vowels and slow rhythm</p>
+          <div class="lyrics-box" id="musicLines"></div>
+          <p class="translation" id="musicVocabulary">shoreline, tide, rhythm, flow</p>
+          <div class="button-row">
+            <button class="primary-button" type="button" id="newMusicButton">New song</button>
+            <button class="secondary-button" type="button" id="speakMusicButton">Listen</button>
+          </div>
+          <textarea id="musicNotes" rows="5" placeholder="groove, chord progression, breath control..."></textarea>
+          <button class="primary-button" type="button" id="saveMusicButton">Save music notes</button>
+        </article>
+      </section>
+
+      <section class="tab-panel" id="notes">
+        <div class="section-heading">
+          <p class="eyebrow">Personal archive</p>
+          <h2>My Notes</h2>
+        </div>
+        <article class="feature-card">
+          <textarea id="generalNotes" rows="10" placeholder="Useful terms, sentences, article ideas, doubts..."></textarea>
+          <button class="primary-button" type="button" id="saveNotesButton">Save notes</button>
+        </article>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
