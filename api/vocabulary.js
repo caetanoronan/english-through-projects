@@ -99,6 +99,37 @@ function buildChildren(word) {
   }));
 }
 
+function buildPagePayload(word, parent) {
+  return {
+    parent,
+    properties: {
+      Term: title(word.term),
+      Tag: select(word.tag),
+      Meaning: richText(word.meaning),
+      Translation: richText(word.translation),
+      Example: richText(word.example),
+      Source: select("App"),
+      Status: select("New")
+    },
+    children: buildChildren(word)
+  };
+}
+
+async function sendToNotion(token, word, parent) {
+  const response = await fetch("https://api.notion.com/v1/pages", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+      "Notion-Version": NOTION_VERSION
+    },
+    body: JSON.stringify(buildPagePayload(word, parent))
+  });
+  const data = await response.json();
+
+  return { response, data };
+}
+
 async function createVocabularyPage(wordInput) {
   const token = process.env.NOTION_TOKEN;
   const dataSourceId = process.env.NOTION_DATA_SOURCE_ID;
@@ -123,29 +154,13 @@ async function createVocabularyPage(wordInput) {
     return { ok: false, status: 400, message: "Term e meaning sao obrigatorios." };
   }
 
-  const response = await fetch("https://api.notion.com/v1/pages", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-      "Notion-Version": NOTION_VERSION
-    },
-    body: JSON.stringify({
-      parent: { data_source_id: dataSourceId },
-      properties: {
-        Term: title(word.term),
-        Tag: select(word.tag),
-        Meaning: richText(word.meaning),
-        Translation: richText(word.translation),
-        Example: richText(word.example),
-        Source: select("App"),
-        Status: select("New")
-      },
-      children: buildChildren(word)
-    })
-  });
+  let { response, data } = await sendToNotion(token, word, { data_source_id: dataSourceId });
 
-  const data = await response.json();
+  if (!response.ok && [400, 404].includes(response.status)) {
+    const fallback = await sendToNotion(token, word, { database_id: dataSourceId });
+    response = fallback.response;
+    data = fallback.data;
+  }
 
   if (!response.ok) {
     return {
