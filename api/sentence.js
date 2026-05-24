@@ -83,7 +83,7 @@ function parseBody(body) {
   return body;
 }
 
-function buildPagePayload(sentence, parent) {
+function buildDatabasePayload(sentence, parent) {
   return {
     parent,
     properties: {
@@ -105,7 +105,39 @@ function buildPagePayload(sentence, parent) {
   };
 }
 
-async function sendToNotion(token, sentence, parent) {
+function buildChildPagePayload(sentence, parent) {
+  return {
+    parent,
+    properties: {
+      title: title(sentence.preview)
+    },
+    children: [
+      {
+        object: "block",
+        type: "heading_2",
+        heading_2: {
+          rich_text: [{ type: "text", text: { content: "Today's Sentence" } }]
+        }
+      },
+      {
+        object: "block",
+        type: "paragraph",
+        paragraph: {
+          rich_text: [{ type: "text", text: { content: sentence.text } }]
+        }
+      },
+      {
+        object: "block",
+        type: "paragraph",
+        paragraph: {
+          rich_text: [{ type: "text", text: { content: `Theme: ${sentence.theme}` } }]
+        }
+      }
+    ]
+  };
+}
+
+async function sendPayloadToNotion(token, payload) {
   const response = await fetch("https://api.notion.com/v1/pages", {
     method: "POST",
     headers: {
@@ -113,11 +145,19 @@ async function sendToNotion(token, sentence, parent) {
       "Content-Type": "application/json",
       "Notion-Version": NOTION_VERSION
     },
-    body: JSON.stringify(buildPagePayload(sentence, parent))
+    body: JSON.stringify(payload)
   });
   const data = await response.json();
 
   return { response, data };
+}
+
+async function sendDatabaseEntryToNotion(token, sentence, parent) {
+  return sendPayloadToNotion(token, buildDatabasePayload(sentence, parent));
+}
+
+async function sendChildPageToNotion(token, sentence, parent) {
+  return sendPayloadToNotion(token, buildChildPagePayload(sentence, parent));
 }
 
 async function createSentencePage(input) {
@@ -143,12 +183,18 @@ async function createSentencePage(input) {
     preview: text.slice(0, 90),
     theme: cleanText(input.theme, 60) || "Daily Practice"
   };
-  let { response, data } = await sendToNotion(token, sentence, { data_source_id: dataSourceId });
+  let { response, data } = await sendDatabaseEntryToNotion(token, sentence, { data_source_id: dataSourceId });
 
   if (!response.ok && [400, 404].includes(response.status)) {
-    const fallback = await sendToNotion(token, sentence, { database_id: dataSourceId });
+    const fallback = await sendDatabaseEntryToNotion(token, sentence, { database_id: dataSourceId });
     response = fallback.response;
     data = fallback.data;
+  }
+
+  if (!response.ok && response.status === 400 && /is a page, not a database/i.test(data.message || "")) {
+    const pageFallback = await sendChildPageToNotion(token, sentence, { page_id: dataSourceId });
+    response = pageFallback.response;
+    data = pageFallback.data;
   }
 
   if (!response.ok) {

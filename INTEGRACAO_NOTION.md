@@ -77,6 +77,8 @@ Checklist rapido:
 6. Copiar o ID do banco de frases para `NOTION_SENTENCES_DATA_SOURCE_ID`.
 7. Configurar `NOTION_TOKEN`, `NOTION_DATA_SOURCE_ID` e `NOTION_SENTENCES_DATA_SOURCE_ID` na Vercel.
 
+Observacao: se `NOTION_SENTENCES_DATA_SOURCE_ID` receber o ID de uma pagina comum, o backend tenta salvar a frase como subpagina. Para ter tabela atualizando automaticamente, use o ID de um database/tabela.
+
 ## Campos sugeridos no Notion
 
 Para vocabulario, crie um banco seguindo `notion-template.md`.
