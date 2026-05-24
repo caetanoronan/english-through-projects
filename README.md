@@ -21,7 +21,7 @@ O conteudo base fica separado em arquivos JSON:
 - `data/readings.json`
 - `data/flashcards.json`
 
-As palavras adicionadas pelo botao `Add Word` ficam salvas no `localStorage` do navegador. Isso permite testar sem banco de dados, mas ainda nao sincroniza automaticamente entre dispositivos.
+As palavras adicionadas pelo botao `Add Word` e a frase escrita em `Today's Sentence` ficam salvas no `localStorage` do navegador. Quando a Vercel e o Notion estao configurados, esses registros tambem podem ser enviados para bancos online protegidos.
 
 ## Recursos atuais
 
@@ -38,7 +38,7 @@ As palavras adicionadas pelo botao `Add Word` ficam salvas no `localStorage` do 
 - Aba Reading com `Listen` e `Record voice` para comparar sua fala com o texto.
 - Layout responsivo com grids fluidos, tema claro/escuro e titulos com gradiente colorido.
 - Fundo visual inspirado nos temas do projeto: ingles, codigo, GIS, oceano, musica e pesquisa.
-- Integracao preparada com Vercel `/api/vocabulary` e Notion, mantendo fallback local.
+- Integracao preparada com Vercel `/api/vocabulary`, `/api/sentence` e Notion, mantendo fallback local.
 
 ## Rotina minima diaria
 
@@ -67,9 +67,9 @@ http://localhost:8000
 
 - Publicar com GitHub Pages.
 - Evoluir o flashcard para repeticao espacada real.
-- Preparar backend na Vercel para salvar vocabulario e ideias.
+- Preparar backend na Vercel para salvar vocabulario e frases.
 - Integrar Notion com tokens protegidos no backend. Veja `INTEGRACAO_NOTION.md`.
-- Sincronizar palavras adicionadas em banco online, como Firebase ou Supabase.
+- Sincronizar palavras e frases adicionadas em banco online.
 - Integrar um dicionario externo para correcao e definicoes automaticas.
 
 ## Publicacao planejada

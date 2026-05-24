@@ -1,6 +1,7 @@
 const storageKey = "englishThroughProjects";
 const themeKey = "englishThroughProjectsTheme";
 const onlineVocabularyEndpoint = window.APP_VOCABULARY_ENDPOINT || "https://english-through-projects.vercel.app/api/vocabulary";
+const onlineSentenceEndpoint = window.APP_SENTENCE_ENDPOINT || "https://english-through-projects.vercel.app/api/sentence";
 const todayKey = new Date().toISOString().slice(0, 10);
 
 let words = [];
@@ -52,6 +53,7 @@ const defaultState = {
   knownCards: [],
   userWords: [],
   pendingSyncWords: [],
+  pendingSyncSentences: [],
   dailySentence: "",
   musicNotes: "",
   generalNotes: "",
@@ -121,6 +123,7 @@ function loadState() {
       knownCards: saved.knownCards || [],
       userWords: saved.userWords || [],
       pendingSyncWords: saved.pendingSyncWords || [],
+      pendingSyncSentences: saved.pendingSyncSentences || [],
       generalNotes: saved.generalNotes || "",
     };
   }
@@ -130,6 +133,7 @@ function loadState() {
     ...saved,
     userWords: saved.userWords || [],
     pendingSyncWords: saved.pendingSyncWords || [],
+    pendingSyncSentences: saved.pendingSyncSentences || [],
   };
 }
 
@@ -396,6 +400,7 @@ function setupEvents() {
     state.dailySentence = document.querySelector("#dailySentence").value.trim();
     state.tasks.sentence = Boolean(state.dailySentence);
     saveState("Sentence saved");
+    syncDailySentence(state.dailySentence);
   });
 
   document.querySelector("#saveMusicButton").addEventListener("click", () => {
@@ -539,6 +544,44 @@ async function syncVocabularyWord(word) {
     }
 
     showToast("Saved locally. Notion sync pending.");
+  }
+}
+
+async function syncDailySentence(text) {
+  if (!text) {
+    return;
+  }
+
+  const sentence = {
+    text,
+    theme: "Daily Practice",
+    date: todayKey,
+  };
+
+  try {
+    const response = await fetch(onlineSentenceEndpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(sentence),
+    });
+    const result = await response.json();
+
+    if (!response.ok || !result.ok) {
+      throw new Error(result.message || "Online sentence sync failed");
+    }
+
+    showToast("Sentence synced with Notion");
+  } catch (error) {
+    const alreadyPending = state.pendingSyncSentences.some(
+      (pendingSentence) => pendingSentence.text.toLowerCase() === text.toLowerCase(),
+    );
+
+    if (!alreadyPending) {
+      state.pendingSyncSentences.push(sentence);
+      localStorage.setItem(storageKey, JSON.stringify(state));
+    }
+
+    showToast("Sentence saved locally. Notion sync pending.");
   }
 }
 

@@ -5,8 +5,8 @@ Este documento descreve a integracao do English Through Projects com Notion usan
 ## Arquitetura proposta
 
 - GitHub Pages publica o HTML, CSS, JavaScript e arquivos JSON estaticos.
-- Vercel hospeda uma API em `/api/vocabulary`.
-- A API da Vercel recebe novas palavras criadas no app.
+- Vercel hospeda APIs em `/api/vocabulary` e `/api/sentence`.
+- A API da Vercel recebe novas palavras e frases criadas no app.
 - A funcao da Vercel conversa com a API do Notion usando variaveis secretas.
 - O Notion funciona como mural/banco real, com permissoes controladas.
 - O navegador salva uma copia local quando a API estiver indisponivel.
@@ -27,10 +27,11 @@ Nunca:
 Browser -> Notion com token publico
 ```
 
-## Endpoint planejado
+## Endpoints
 
 ```text
 https://english-through-projects.vercel.app/api/vocabulary
+https://english-through-projects.vercel.app/api/sentence
 ```
 
 Se o projeto na Vercel tiver outro nome de dominio, defina o endpoint antes de carregar `app.js`:
@@ -38,10 +39,11 @@ Se o projeto na Vercel tiver outro nome de dominio, defina o endpoint antes de c
 ```html
 <script>
   window.APP_VOCABULARY_ENDPOINT = "https://seu-projeto.vercel.app/api/vocabulary";
+  window.APP_SENTENCE_ENDPOINT = "https://seu-projeto.vercel.app/api/sentence";
 </script>
 ```
 
-O app tenta enviar novas palavras para esse endpoint. Se ele ainda nao estiver configurado, a palavra continua salva localmente no navegador.
+O app tenta enviar novas palavras e a frase diaria para esses endpoints. Se algum endpoint ainda nao estiver configurado, o conteudo continua salvo localmente no navegador.
 
 ## Variaveis secretas na Vercel
 
@@ -50,6 +52,7 @@ Configurar no painel da Vercel:
 ```text
 NOTION_TOKEN
 NOTION_DATA_SOURCE_ID
+NOTION_SENTENCES_DATA_SOURCE_ID
 ```
 
 Essas variaveis ficam disponiveis apenas no backend da Vercel.
@@ -66,11 +69,13 @@ A integracao nao consegue criar o banco do zero. Voce precisa primeiro criar o d
 
 Checklist rapido:
 
-1. Criar a page/database no Notion usando o modelo de [notion-template.md](notion-template.md).
-2. Garantir as propriedades `Term`, `Tag`, `Meaning`, `Translation`, `Example`, `Source` e `Status`.
-3. Compartilhar o database com a integracao interna do Notion.
-4. Copiar o `NOTION_DATA_SOURCE_ID` do database correto.
-5. Configurar `NOTION_TOKEN` e `NOTION_DATA_SOURCE_ID` na Vercel.
+1. Criar os databases no Notion usando o modelo de [notion-template.md](notion-template.md).
+2. No banco de vocabulario, garantir as propriedades `Term`, `Tag`, `Meaning`, `Translation`, `Example`, `Source` e `Status`.
+3. No banco de frases, garantir as propriedades `Sentence`, `FullText`, `Theme`, `Source` e `Status`.
+4. Compartilhar os databases com a integracao interna do Notion.
+5. Copiar o ID do banco de vocabulario para `NOTION_DATA_SOURCE_ID`.
+6. Copiar o ID do banco de frases para `NOTION_SENTENCES_DATA_SOURCE_ID`.
+7. Configurar `NOTION_TOKEN`, `NOTION_DATA_SOURCE_ID` e `NOTION_SENTENCES_DATA_SOURCE_ID` na Vercel.
 
 ## Campos sugeridos no Notion
 
@@ -85,12 +90,21 @@ Para vocabulario, crie um banco seguindo `notion-template.md`.
 - `Status`: select com `New`, `Reviewed`, `Needs review`
 - `Created At`: created time
 
+Para frases diarias, crie outro banco seguindo `notion-template.md`.
+
+- `Sentence`: titulo
+- `FullText`: texto
+- `Theme`: select
+- `Source`: select com `App`, `Manual`
+- `Status`: select com `New`, `Reviewed`, `Needs review`
+- `Created At`: created time
+
 ## Fallback local
 
 Se a API da Vercel falhar, o app:
 
-- salva a palavra no `localStorage`;
-- registra uma copia em `pendingSyncWords`;
+- salva palavra ou frase no `localStorage`;
+- registra uma copia em `pendingSyncWords` ou `pendingSyncSentences`;
 - avisa que a sincronizacao online ficou pendente;
 - permitir exportacao em JSON;
 - pode tentar sincronizar depois em uma versao futura.
@@ -99,12 +113,12 @@ Se a API da Vercel falhar, o app:
 
 1. Publicar a versao estatica no GitHub Pages.
 2. Criar projeto Vercel para a API.
-3. Criar a base no Notion.
+3. Criar as bases no Notion.
 4. Criar uma integracao interna no Notion.
-5. Compartilhar a base do Notion com essa integracao.
-6. Configurar `NOTION_TOKEN` e `NOTION_DATA_SOURCE_ID` na Vercel.
-7. Criar endpoint `/api/vocabulary`.
-8. Atualizar o app para enviar novas palavras para a API.
+5. Compartilhar as bases do Notion com essa integracao.
+6. Configurar `NOTION_TOKEN`, `NOTION_DATA_SOURCE_ID` e `NOTION_SENTENCES_DATA_SOURCE_ID` na Vercel.
+7. Criar endpoints `/api/vocabulary` e `/api/sentence`.
+8. Atualizar o app para enviar novas palavras e frases para a API.
 9. Manter `localStorage` como fallback offline.
 
 ## Criar a integracao interna do Notion
@@ -129,7 +143,7 @@ Depois de criar o banco:
 3. Convide a integracao `English Through Projects`.
 4. Garanta permissao para editar o banco.
 
-Se a API responder `Could not find data_source`, quase sempre significa que a integracao nao foi compartilhada com o banco correto.
+Se a API responder `Could not find data_source`, quase sempre significa que a integracao nao foi compartilhada com o banco correto ou que o ID configurado na Vercel pertence a outra pagina.
 
 ## Testes rapidos
 
@@ -157,6 +171,17 @@ $body = @{
 } | ConvertTo-Json
 
 Invoke-WebRequest -Uri 'https://english-through-projects.vercel.app/api/vocabulary' -Method POST -Headers @{ Origin='https://caetanoronan.github.io' } -ContentType 'application/json' -Body $body
+```
+
+POST real para `Today's Sentence`:
+
+```powershell
+$body = @{
+  text='Today I mapped the coastline and reviewed one English sentence.'
+  theme='Daily Practice'
+} | ConvertTo-Json
+
+Invoke-WebRequest -Uri 'https://english-through-projects.vercel.app/api/sentence' -Method POST -Headers @{ Origin='https://caetanoronan.github.io' } -ContentType 'application/json' -Body $body
 ```
 
 ## Observacao

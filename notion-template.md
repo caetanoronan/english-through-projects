@@ -1,18 +1,18 @@
 # Notion Template | English Through Projects
 
-Use este modelo para criar o banco de vocabulario que recebera as palavras novas enviadas pelo app.
+Use estes modelos para criar os bancos do Notion que recebem os dados enviados pelo app.
 
-## Nome sugerido
+## Vocabulary Bank
 
-English Through Projects - Vocabulary Bank
+Nome sugerido: `English Through Projects - Vocabulary Bank`
 
-## Visao principal
+### Visao principal
 
 Tipo: Table
 
 Agrupar ou filtrar por: `Tag`, `Status` ou `Source`
 
-## Propriedades esperadas pela API
+### Propriedades esperadas pela API
 
 | Propriedade | Tipo | Uso |
 | --- | --- | --- |
@@ -25,15 +25,60 @@ Agrupar ou filtrar por: `Tag`, `Status` ou `Source`
 | Status | Select | New, Reviewed, Needs review |
 | Created At | Created time | Registro automatico |
 
-## Opcoes sugeridas
+### Opcoes sugeridas
 
-### Source
+Source:
 
 - App
 - Import
 - Manual
 
-### Status
+Status:
+
+- New
+- Reviewed
+- Needs review
+
+## Daily Sentences
+
+Nome sugerido: `English Through Projects - Daily Sentences`
+
+Este segundo banco recebe as frases escritas no bloco `Today's Sentence`.
+
+### Visao principal
+
+Tipo: Table
+
+Agrupar ou filtrar por: `Theme`, `Status` ou `Source`
+
+### Propriedades esperadas pela API
+
+| Propriedade | Tipo | Uso |
+| --- | --- | --- |
+| Sentence | Title | Previa curta da frase |
+| FullText | Text | Frase completa escrita no app |
+| Theme | Select | Tema da frase |
+| Source | Select | Origem do registro |
+| Status | Select | Estado de revisao |
+| Created At | Created time | Registro automatico |
+
+### Opcoes sugeridas
+
+Theme:
+
+- Daily Practice
+- Research
+- Code
+- Music
+- Reading
+- Personal
+
+Source:
+
+- App
+- Manual
+
+Status:
 
 - New
 - Reviewed
@@ -42,13 +87,15 @@ Agrupar ou filtrar por: `Tag`, `Status` ou `Source`
 ## Fluxo seguro
 
 ```text
-GitHub Pages -> Vercel /api/vocabulary -> Notion
+GitHub Pages -> Vercel API -> Notion
 ```
 
 O token do Notion deve ficar apenas na Vercel em `NOTION_TOKEN`.
 
-O ID do data source deve ficar apenas na Vercel em `NOTION_DATA_SOURCE_ID`.
+O ID do banco de vocabulario deve ficar apenas na Vercel em `NOTION_DATA_SOURCE_ID`.
+
+O ID do banco de frases deve ficar apenas na Vercel em `NOTION_SENTENCES_DATA_SOURCE_ID`.
 
 ## Fallback
 
-Se a API estiver indisponivel, o app continua salvando a palavra no navegador via `localStorage`. Depois, a palavra pode ser exportada em JSON ou sincronizada em uma etapa futura.
+Se a API estiver indisponivel, o app continua salvando palavras e frases no navegador via `localStorage`. Depois, esses dados podem ser exportados ou sincronizados em uma etapa futura.
