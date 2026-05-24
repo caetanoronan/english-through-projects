@@ -33,6 +33,14 @@ Browser -> Notion com token publico
 https://english-through-projects.vercel.app/api/vocabulary
 ```
 
+Se o projeto na Vercel tiver outro nome de dominio, defina o endpoint antes de carregar `app.js`:
+
+```html
+<script>
+  window.APP_VOCABULARY_ENDPOINT = "https://seu-projeto.vercel.app/api/vocabulary";
+</script>
+```
+
 O app tenta enviar novas palavras para esse endpoint. Se ele ainda nao estiver configurado, a palavra continua salva localmente no navegador.
 
 ## Variaveis secretas na Vercel
@@ -51,6 +59,18 @@ Opcional:
 ```text
 NOTION_VERSION=2026-03-11
 ```
+
+## Antes de configurar a Vercel
+
+A integracao nao consegue criar o banco do zero. Voce precisa primeiro criar o database no Notion e compartilhar esse database com a integracao interna.
+
+Checklist rapido:
+
+1. Criar a page/database no Notion usando o modelo de [notion-template.md](notion-template.md).
+2. Garantir as propriedades `Term`, `Tag`, `Meaning`, `Translation`, `Example`, `Source` e `Status`.
+3. Compartilhar o database com a integracao interna do Notion.
+4. Copiar o `NOTION_DATA_SOURCE_ID` do database correto.
+5. Configurar `NOTION_TOKEN` e `NOTION_DATA_SOURCE_ID` na Vercel.
 
 ## Campos sugeridos no Notion
 

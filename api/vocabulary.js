@@ -2,17 +2,37 @@ const NOTION_VERSION = process.env.NOTION_VERSION || "2026-03-11";
 
 const allowedOrigins = [
   "https://caetanoronan.github.io",
-  "https://caetanoronan.github.io/english-through-projects",
-  "https://english-through-projects.vercel.app",
-  "http://localhost:8000",
-  "http://127.0.0.1:5500"
+  "https://english-through-projects.vercel.app"
 ];
+
+function isAllowedOrigin(origin) {
+  if (!origin) {
+    return false;
+  }
+
+  if (allowedOrigins.includes(origin)) {
+    return true;
+  }
+
+  if (/^https:\/\/[^/]+\.github\.io$/.test(origin)) {
+    return true;
+  }
+
+  if (/^https:\/\/[^/]+\.vercel\.app$/.test(origin)) {
+    return true;
+  }
+
+  if (/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) {
+    return true;
+  }
+
+  return false;
+}
 
 function setCorsHeaders(req, res) {
   const origin = req.headers.origin;
-  const isProjectVercelDomain = /^https:\/\/english-through-projects.*\.vercel\.app$/.test(origin || "");
 
-  if (allowedOrigins.includes(origin) || isProjectVercelDomain) {
+  if (isAllowedOrigin(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   }
 

@@ -1,6 +1,6 @@
 const storageKey = "englishThroughProjects";
 const themeKey = "englishThroughProjectsTheme";
-const onlineVocabularyEndpoint = "https://english-through-projects.vercel.app/api/vocabulary";
+const onlineVocabularyEndpoint = window.APP_VOCABULARY_ENDPOINT || "https://english-through-projects.vercel.app/api/vocabulary";
 const todayKey = new Date().toISOString().slice(0, 10);
 
 let words = [];
