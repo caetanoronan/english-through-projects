@@ -30,5 +30,173 @@
   {
     "title": "Listening Through Music",
     "text": "Music lessons in English train vocabulary, rhythm, pronunciation, and attention to stress patterns without feeling like formal study."
+  },
+  {
+    "title": "Project Notes",
+    "text": "A good project note explains what was done, why it matters, and what should happen next."
+  },
+  {
+    "title": "Field Data",
+    "text": "Field data becomes more useful when each observation includes location, date, method, and context."
+  },
+  {
+    "title": "Map Layers",
+    "text": "Map layers help organize different types of information, such as vegetation, water, roads, and sampling points."
+  },
+  {
+    "title": "Scientific Methods",
+    "text": "A clear method allows another researcher to understand, evaluate, and repeat the same procedure."
+  },
+  {
+    "title": "Code Comments",
+    "text": "Useful comments explain why a decision was made, not only what the code is doing."
+  },
+  {
+    "title": "Git Commit",
+    "text": "A commit should describe a meaningful change, such as adding a feature, fixing a bug, or improving documentation."
+  },
+  {
+    "title": "Coastal Erosion",
+    "text": "Coastal erosion happens when waves, currents, storms, or human activities remove sediment from the shoreline."
+  },
+  {
+    "title": "Mangrove Protection",
+    "text": "Mangroves reduce wave energy, trap sediment, store carbon, and provide habitat for many organisms."
+  },
+  {
+    "title": "Water Quality",
+    "text": "Water quality can be described using variables such as temperature, salinity, turbidity, and dissolved oxygen."
+  },
+  {
+    "title": "Drone Mapping",
+    "text": "Drone mapping can produce detailed images that support coastal monitoring, habitat classification, and field planning."
+  },
+  {
+    "title": "Spatial Patterns",
+    "text": "Spatial patterns help reveal where environmental changes are concentrated and which areas need more attention."
+  },
+  {
+    "title": "Database Records",
+    "text": "Each database record should represent one clear observation, event, sample, or object."
+  },
+  {
+    "title": "Vocabulary Review",
+    "text": "Vocabulary becomes stronger when new words are connected to real tasks, images, sounds, and decisions."
+  },
+  {
+    "title": "Pronunciation Practice",
+    "text": "Pronunciation improves when you listen carefully, repeat slowly, and compare your speech with a clear model."
+  },
+  {
+    "title": "Song Study",
+    "text": "A song study can focus on vocabulary, rhythm, stress, intonation, and useful expressions."
+  },
+  {
+    "title": "Academic Writing",
+    "text": "Academic writing values clarity, evidence, structure, and careful explanation of methods and results."
+  },
+  {
+    "title": "Research Question",
+    "text": "A strong research question is specific, answerable, and connected to a real problem."
+  },
+  {
+    "title": "Data Cleaning",
+    "text": "Data cleaning removes errors, standardizes values, and prepares information for analysis."
+  },
+  {
+    "title": "Coordinates",
+    "text": "Coordinates identify locations on Earth and allow field data to be displayed on a map."
+  },
+  {
+    "title": "Remote Sensing",
+    "text": "Remote sensing collects information from satellites, aircraft, or drones without direct contact with the target."
+  },
+  {
+    "title": "Image Classification",
+    "text": "Image classification assigns pixels or objects to categories such as vegetation, water, sand, or urban area."
+  },
+  {
+    "title": "Species Identification",
+    "text": "Species identification requires attention to shape, color, habitat, size, and reliable taxonomic references."
+  },
+  {
+    "title": "Ecological Resilience",
+    "text": "Ecological resilience describes how well an ecosystem can recover after stress or disturbance."
+  },
+  {
+    "title": "Scientific Evidence",
+    "text": "Scientific evidence supports conclusions through observations, measurements, comparisons, and transparent methods."
+  },
+  {
+    "title": "Literature Search",
+    "text": "A literature search helps you understand what is already known and where new work can contribute."
+  },
+  {
+    "title": "Abstract First",
+    "text": "Reading the abstract first helps you decide whether the full paper is relevant to your project."
+  },
+  {
+    "title": "Figure Caption",
+    "text": "A figure caption should describe what the reader sees and why the figure is important."
+  },
+  {
+    "title": "Presentation Skills",
+    "text": "A clear presentation uses simple language, strong visuals, and a logical sequence of ideas."
+  },
+  {
+    "title": "Listening Strategy",
+    "text": "When listening in English, focus first on the main idea, then listen again for details."
+  },
+  {
+    "title": "Technical Vocabulary",
+    "text": "Technical vocabulary is easier to remember when it appears in your own maps, scripts, papers, and notes."
+  },
+  {
+    "title": "Workflow Design",
+    "text": "A good workflow reduces repeated effort and makes project steps easier to check and improve."
+  },
+  {
+    "title": "Version Control",
+    "text": "Version control allows you to experiment with changes while keeping a history of previous work."
+  },
+  {
+    "title": "Static Website",
+    "text": "A static website can be fast, simple, and reliable when the content does not require a private server."
+  },
+  {
+    "title": "API Integration",
+    "text": "An API integration lets one application send data to another service in a controlled way."
+  },
+  {
+    "title": "Notion Backend",
+    "text": "A Notion backend can store vocabulary, notes, and ideas while keeping sensitive tokens outside the public website."
+  },
+  {
+    "title": "Vercel Function",
+    "text": "A Vercel function can receive data from the browser and safely forward it to an external service."
+  },
+  {
+    "title": "Fallback Storage",
+    "text": "Fallback storage keeps user data locally when the online service is unavailable."
+  },
+  {
+    "title": "Learning Habit",
+    "text": "A small learning habit works best when it is connected to tasks you already care about."
+  },
+  {
+    "title": "Ocean Current",
+    "text": "An ocean current moves water, heat, nutrients, and organisms across coastal and offshore environments."
+  },
+  {
+    "title": "Sediment Transport",
+    "text": "Sediment transport explains how sand and mud move along beaches, rivers, and estuaries."
+  },
+  {
+    "title": "Benthic Habitat",
+    "text": "A benthic habitat includes the bottom surface and the organisms living on or near it."
+  },
+  {
+    "title": "Musical Intonation",
+    "text": "Musical intonation and spoken intonation both depend on careful listening to pitch movement."
   }
 ]

@@ -76,14 +76,15 @@ async function loadContent() {
   words = [...baseWords, ...state.userWords];
   readings = baseReadings;
   songs = baseSongs;
-  flashcards = [
-    ...baseFlashcards,
-    ...state.userWords.map((word) => ({
-      front: word.term,
-      back: `${word.translation || "Sem traducao"}: ${word.meaning}`,
-      category: word.tag || "Personal",
-    })),
-  ];
+  flashcards = words.map((word) => ({
+    front: word.term,
+    back: `${word.translation || "Sem traducao"}: ${word.meaning}`,
+    category: word.tag || "Personal",
+  }));
+
+  if (!flashcards.length) {
+    flashcards = baseFlashcards;
+  }
 }
 
 async function loadJson(path, fallback) {
@@ -165,8 +166,11 @@ function render() {
   document.querySelector("#musicTitle").textContent = song.title;
   document.querySelector("#musicStyle").textContent = song.style;
   document.querySelector("#musicFocus").textContent = song.focus;
+  document.querySelector("#musicActivity").textContent = song.activity || "";
   document.querySelector("#musicVocabulary").textContent = song.vocabulary.join(", ");
+  document.querySelector("#musicExpressions").textContent = (song.expressions || []).join(", ");
   document.querySelector("#backupSummary").textContent = `Personal words saved: ${state.userWords.length}`;
+  renderMusicLink(song);
   renderSongLines(song);
 
   document.querySelector("#dailySentence").value = state.dailySentence;
@@ -191,6 +195,19 @@ function renderSongLines(song) {
     paragraph.textContent = line;
     lyricsBox.append(paragraph);
   });
+}
+
+function renderMusicLink(song) {
+  const link = document.querySelector("#musicStudyLink");
+
+  if (!song.studyLink) {
+    link.hidden = true;
+    link.removeAttribute("href");
+    return;
+  }
+
+  link.hidden = false;
+  link.href = song.studyLink;
 }
 
 function renderKnownWords() {

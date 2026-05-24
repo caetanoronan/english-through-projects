@@ -415,6 +415,15 @@ main {
   font-weight: 800;
 }
 
+.study-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  margin-top: 8px;
+  color: var(--accent-strong);
+  font-weight: 900;
+}
+
 :root[data-theme="dark"] .translation,
 :root[data-theme="dark"] .summary-card strong,
 :root[data-theme="dark"] .flashcard h3,

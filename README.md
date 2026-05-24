@@ -26,12 +26,14 @@ As palavras adicionadas pelo botao `Add Word` ficam salvas no `localStorage` do 
 ## Recursos atuais
 
 - Vocabulario expandido por temas: programacao, GitHub, GIS, oceanografia, biologia marinha, pesquisa academica e musica.
+- Base inicial com 100 palavras e 50 leituras curtas.
 - Botao `Add Word` para adicionar palavras pessoais.
 - Exportacao e importacao do vocabulario pessoal em JSON.
 - Aba `Vocabulary Bank` com busca, filtro por tema e tabela de referencia do vocabulario.
+- Flashcards gerados automaticamente a partir do `Vocabulary Bank`.
 - Sugestao simples de correcao comparando a palavra digitada com o vocabulario existente.
 - Leitura em voz alta com a Web Speech API do navegador.
-- Aba Music com versos originais curtos para treino de ritmo, escuta e pronuncia.
+- Aba Music com song study cards, versos originais, links de estudo e vocabulario musical.
 - Aba Reading com `Listen` e `Record voice` para comparar sua fala com o texto.
 - Layout responsivo com grids fluidos, tema claro/escuro e titulos com gradiente colorido.
 - Fundo visual inspirado nos temas do projeto: ingles, codigo, GIS, oceano, musica e pesquisa.

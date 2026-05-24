@@ -278,5 +278,425 @@
     "meaning": "The act of creating music spontaneously while performing.",
     "translation": "improvisacao",
     "example": "Improvisation connects listening, technique, and musical memory."
+  },
+  {
+    "term": "script",
+    "tag": "Programming",
+    "meaning": "A file with instructions that a computer can run.",
+    "translation": "script",
+    "example": "The script downloads and organizes the field data."
+  },
+  {
+    "term": "debugging",
+    "tag": "Programming",
+    "meaning": "The process of finding and fixing problems in code.",
+    "translation": "depuracao",
+    "example": "Debugging helped me find an error in the loop."
+  },
+  {
+    "term": "workflow",
+    "tag": "Programming",
+    "meaning": "An organized sequence of steps used to complete a task.",
+    "translation": "fluxo de trabalho",
+    "example": "This workflow converts raw data into maps."
+  },
+  {
+    "term": "output",
+    "tag": "Programming",
+    "meaning": "The result produced by a program, process, or analysis.",
+    "translation": "saida",
+    "example": "The output is a table with cleaned measurements."
+  },
+  {
+    "term": "input",
+    "tag": "Programming",
+    "meaning": "Data or information provided to a system or program.",
+    "translation": "entrada",
+    "example": "The input file contains coordinates and species names."
+  },
+  {
+    "term": "syntax",
+    "tag": "Programming",
+    "meaning": "The rules that define how code must be written.",
+    "translation": "sintaxe",
+    "example": "A missing comma caused a syntax error."
+  },
+  {
+    "term": "parameter",
+    "tag": "Programming",
+    "meaning": "A value that controls how a function or command works.",
+    "translation": "parametro",
+    "example": "Change the parameter to adjust the buffer distance."
+  },
+  {
+    "term": "automation",
+    "tag": "Programming",
+    "meaning": "The use of code or tools to perform tasks automatically.",
+    "translation": "automacao",
+    "example": "Automation saves time during repetitive data processing."
+  },
+  {
+    "term": "version control",
+    "tag": "GitHub",
+    "meaning": "A system for tracking changes in project files over time.",
+    "translation": "controle de versao",
+    "example": "Version control makes it safer to improve the app."
+  },
+  {
+    "term": "pull request",
+    "tag": "GitHub",
+    "meaning": "A proposal to merge changes into a repository.",
+    "translation": "solicitacao de alteracao",
+    "example": "The pull request explains what changed in the project."
+  },
+  {
+    "term": "issue",
+    "tag": "GitHub",
+    "meaning": "A tracked task, bug, idea, or discussion in a repository.",
+    "translation": "tarefa ou problema",
+    "example": "Create an issue to remember the next feature."
+  },
+  {
+    "term": "deployment",
+    "tag": "Web",
+    "meaning": "The process of publishing an app or website online.",
+    "translation": "publicacao",
+    "example": "The deployment made the app available on GitHub Pages."
+  },
+  {
+    "term": "static site",
+    "tag": "Web",
+    "meaning": "A website made of files that can be served without a backend.",
+    "translation": "site estatico",
+    "example": "GitHub Pages is ideal for a static site."
+  },
+  {
+    "term": "browser",
+    "tag": "Web",
+    "meaning": "A program used to access and interact with websites.",
+    "translation": "navegador",
+    "example": "The browser stores personal words in localStorage."
+  },
+  {
+    "term": "local storage",
+    "tag": "Web",
+    "meaning": "A browser feature for storing data on one device.",
+    "translation": "armazenamento local",
+    "example": "Local storage keeps your notes after you close the page."
+  },
+  {
+    "term": "responsive layout",
+    "tag": "Web",
+    "meaning": "A design that adapts to different screen sizes.",
+    "translation": "layout responsivo",
+    "example": "The responsive layout works on widescreen and mobile."
+  },
+  {
+    "term": "accessibility",
+    "tag": "Web",
+    "meaning": "Design practices that make an app usable by more people.",
+    "translation": "acessibilidade",
+    "example": "Accessibility improves navigation for keyboard and screen reader users."
+  },
+  {
+    "term": "projection",
+    "tag": "GIS",
+    "meaning": "A method for representing Earth's curved surface on a flat map.",
+    "translation": "projecao",
+    "example": "The projection affects distance and area measurements."
+  },
+  {
+    "term": "georeferencing",
+    "tag": "GIS",
+    "meaning": "The process of assigning real-world coordinates to spatial data.",
+    "translation": "georreferenciamento",
+    "example": "Georeferencing aligned the old map with satellite imagery."
+  },
+  {
+    "term": "attribute table",
+    "tag": "GIS",
+    "meaning": "A table that stores information about spatial features.",
+    "translation": "tabela de atributos",
+    "example": "The attribute table includes species and sampling date."
+  },
+  {
+    "term": "polygon",
+    "tag": "GIS",
+    "meaning": "A closed shape used to represent an area on a map.",
+    "translation": "poligono",
+    "example": "The polygon marks the mangrove boundary."
+  },
+  {
+    "term": "contour line",
+    "tag": "Mapping",
+    "meaning": "A line on a map connecting points with the same elevation.",
+    "translation": "curva de nivel",
+    "example": "Contour lines help interpret slope and relief."
+  },
+  {
+    "term": "spatial analysis",
+    "tag": "GIS",
+    "meaning": "The study of patterns and relationships in geographic data.",
+    "translation": "analise espacial",
+    "example": "Spatial analysis identified areas vulnerable to erosion."
+  },
+  {
+    "term": "classification",
+    "tag": "Remote Sensing",
+    "meaning": "The process of assigning image pixels or features to categories.",
+    "translation": "classificacao",
+    "example": "The classification separated water, sand, and vegetation."
+  },
+  {
+    "term": "resolution",
+    "tag": "Remote Sensing",
+    "meaning": "The level of detail available in an image or dataset.",
+    "translation": "resolucao",
+    "example": "Higher resolution shows smaller coastal features."
+  },
+  {
+    "term": "drone survey",
+    "tag": "Geotechnology",
+    "meaning": "A field survey using drone images or videos.",
+    "translation": "levantamento com drone",
+    "example": "The drone survey documented beach erosion."
+  },
+  {
+    "term": "bathymetry",
+    "tag": "Oceanography",
+    "meaning": "The measurement and mapping of underwater depth.",
+    "translation": "batimetria",
+    "example": "Bathymetry helps describe the shape of the seafloor."
+  },
+  {
+    "term": "sediment",
+    "tag": "Oceanography",
+    "meaning": "Particles such as sand, mud, or organic material deposited by water or wind.",
+    "translation": "sedimento",
+    "example": "Fine sediment accumulated near the estuary."
+  },
+  {
+    "term": "wave energy",
+    "tag": "Oceanography",
+    "meaning": "The force carried by waves as they move through water.",
+    "translation": "energia das ondas",
+    "example": "High wave energy can increase coastal erosion."
+  },
+  {
+    "term": "upwelling",
+    "tag": "Oceanography",
+    "meaning": "The movement of deep, nutrient-rich water toward the surface.",
+    "translation": "ressurgencia",
+    "example": "Upwelling can increase biological productivity."
+  },
+  {
+    "term": "water column",
+    "tag": "Oceanography",
+    "meaning": "The vertical section of water from the surface to the bottom.",
+    "translation": "coluna d'agua",
+    "example": "Temperature varies through the water column."
+  },
+  {
+    "term": "dissolved oxygen",
+    "tag": "Oceanography",
+    "meaning": "The amount of oxygen available in water for aquatic organisms.",
+    "translation": "oxigenio dissolvido",
+    "example": "Low dissolved oxygen can stress marine life."
+  },
+  {
+    "term": "plankton",
+    "tag": "Marine Biology",
+    "meaning": "Small organisms that drift in water.",
+    "translation": "plancton",
+    "example": "Plankton are essential in marine food webs."
+  },
+  {
+    "term": "benthic",
+    "tag": "Marine Biology",
+    "meaning": "Related to organisms or processes on the bottom of a body of water.",
+    "translation": "bentonico",
+    "example": "Benthic communities live on or near the seafloor."
+  },
+  {
+    "term": "invertebrate",
+    "tag": "Marine Biology",
+    "meaning": "An animal without a backbone.",
+    "translation": "invertebrado",
+    "example": "Many rocky shore invertebrates tolerate strong waves."
+  },
+  {
+    "term": "taxonomy",
+    "tag": "Marine Biology",
+    "meaning": "The science of naming and classifying organisms.",
+    "translation": "taxonomia",
+    "example": "Taxonomy helps organize species observations."
+  },
+  {
+    "term": "substrate",
+    "tag": "Ecology",
+    "meaning": "The surface or material where an organism lives or grows.",
+    "translation": "substrato",
+    "example": "Macroalgae attached to the rocky substrate."
+  },
+  {
+    "term": "resilience",
+    "tag": "Ecology",
+    "meaning": "The ability of a system to recover after disturbance.",
+    "translation": "resiliencia",
+    "example": "Mangrove resilience depends on water flow and sediment supply."
+  },
+  {
+    "term": "disturbance",
+    "tag": "Ecology",
+    "meaning": "An event that changes environmental conditions or community structure.",
+    "translation": "disturbio",
+    "example": "A storm can be a major disturbance for coastal habitats."
+  },
+  {
+    "term": "conservation",
+    "tag": "Ecology",
+    "meaning": "The protection and management of nature and biodiversity.",
+    "translation": "conservacao",
+    "example": "Conservation actions can protect sensitive coastal areas."
+  },
+  {
+    "term": "hypothesis",
+    "tag": "Academic English",
+    "meaning": "A testable idea or explanation.",
+    "translation": "hipotese",
+    "example": "The hypothesis predicts higher diversity near the reef."
+  },
+  {
+    "term": "objective",
+    "tag": "Academic English",
+    "meaning": "A specific goal of a study or project.",
+    "translation": "objetivo",
+    "example": "The objective is to compare water quality across sites."
+  },
+  {
+    "term": "discussion",
+    "tag": "Academic English",
+    "meaning": "The section of a paper that interprets results and connects them to other studies.",
+    "translation": "discussao",
+    "example": "The discussion explains why the findings matter."
+  },
+  {
+    "term": "limitation",
+    "tag": "Academic English",
+    "meaning": "A weakness or boundary that affects how results should be interpreted.",
+    "translation": "limitacao",
+    "example": "A small sample size is a limitation of the study."
+  },
+  {
+    "term": "peer review",
+    "tag": "Academic English",
+    "meaning": "Evaluation of academic work by experts in the same field.",
+    "translation": "revisao por pares",
+    "example": "Peer review improves the reliability of scientific publications."
+  },
+  {
+    "term": "citation",
+    "tag": "Academic English",
+    "meaning": "A reference to a source used in a text.",
+    "translation": "citacao",
+    "example": "Every claim should include a citation when possible."
+  },
+  {
+    "term": "literature review",
+    "tag": "Academic English",
+    "meaning": "A synthesis of previous research on a topic.",
+    "translation": "revisao de literatura",
+    "example": "The literature review identifies gaps in coastal monitoring."
+  },
+  {
+    "term": "tempo",
+    "tag": "Music",
+    "meaning": "The speed of a piece of music.",
+    "translation": "andamento",
+    "example": "A slower tempo makes pronunciation practice easier."
+  },
+  {
+    "term": "pitch",
+    "tag": "Music",
+    "meaning": "How high or low a sound is.",
+    "translation": "altura",
+    "example": "Pitch control helps singers stay in tune."
+  },
+  {
+    "term": "intonation",
+    "tag": "Music",
+    "meaning": "The rise and fall of pitch in speech or music.",
+    "translation": "entonacao",
+    "example": "English intonation changes the feeling of a sentence."
+  },
+  {
+    "term": "syncopation",
+    "tag": "Music",
+    "meaning": "A rhythm that emphasizes unexpected beats.",
+    "translation": "sincopa",
+    "example": "Syncopation gives the groove a dancing feel."
+  },
+  {
+    "term": "articulation",
+    "tag": "Music",
+    "meaning": "The way notes or sounds are started, connected, and ended.",
+    "translation": "articulacao",
+    "example": "Clear articulation improves both music and pronunciation."
+  },
+  {
+    "term": "rehearsal",
+    "tag": "Music",
+    "meaning": "A practice session before a performance.",
+    "translation": "ensaio",
+    "example": "The rehearsal focused on timing and dynamics."
+  },
+  {
+    "term": "lyrics",
+    "tag": "Music",
+    "meaning": "The words of a song.",
+    "translation": "letra de musica",
+    "example": "Short lyrics can be useful for pronunciation practice."
+  },
+  {
+    "term": "deadline",
+    "tag": "Daily English",
+    "meaning": "The latest time or date when something must be finished.",
+    "translation": "prazo",
+    "example": "The deadline for the report is Friday."
+  },
+  {
+    "term": "feedback",
+    "tag": "Daily English",
+    "meaning": "Comments or advice about how to improve something.",
+    "translation": "retorno",
+    "example": "Feedback helped me improve the presentation."
+  },
+  {
+    "term": "draft",
+    "tag": "Daily English",
+    "meaning": "An early version of a text, map, design, or project.",
+    "translation": "rascunho",
+    "example": "This is the first draft of the abstract."
+  },
+  {
+    "term": "overview",
+    "tag": "Daily English",
+    "meaning": "A general summary of a topic or situation.",
+    "translation": "visao geral",
+    "example": "The overview explains the purpose of the project."
+  },
+  {
+    "term": "insight",
+    "tag": "Daily English",
+    "meaning": "A clear understanding or useful idea.",
+    "translation": "percepcao",
+    "example": "The graph gave us an insight into seasonal changes."
+  },
+  {
+    "term": "trade-off",
+    "tag": "Daily English",
+    "meaning": "A balance between two advantages or disadvantages.",
+    "translation": "compromisso entre escolhas",
+    "example": "There is a trade-off between speed and accuracy."
   }
 ]

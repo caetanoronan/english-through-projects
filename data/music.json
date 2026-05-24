@@ -1,50 +1,114 @@
 [
   {
     "title": "Coastal Morning",
-    "style": "Folk / acoustic",
+    "style": "Original practice song",
     "focus": "Clear vowels and slow rhythm",
+    "activity": "Read the lines slowly, then sing or speak them with a relaxed pulse.",
+    "studyLink": "",
     "lines": [
       "I walk beside the water",
       "The morning tide is low",
       "I listen to the shoreline",
       "And let the rhythm flow"
     ],
-    "vocabulary": ["shoreline", "tide", "rhythm", "flow"]
+    "vocabulary": ["shoreline", "tide", "rhythm", "flow"],
+    "expressions": ["beside the water", "let the rhythm flow"]
   },
   {
     "title": "Mangrove Groove",
-    "style": "Brazilian groove / funk",
+    "style": "Original practice groove",
     "focus": "Stress and syncopation",
+    "activity": "Clap the beat and speak each line with strong stress on the content words.",
+    "studyLink": "",
     "lines": [
       "Roots in the water",
       "Birds in the sky",
       "Life in the mangrove",
       "Moving with the tide"
     ],
-    "vocabulary": ["roots", "mangrove", "moving", "tide"]
+    "vocabulary": ["roots", "mangrove", "moving", "tide"],
+    "expressions": ["in the water", "with the tide"]
   },
   {
     "title": "Data Blues",
-    "style": "Blues",
+    "style": "Original blues practice",
     "focus": "Final consonants and phrasing",
+    "activity": "Speak the lines like a blues phrase and exaggerate final consonants.",
+    "studyLink": "",
     "lines": [
       "I clean my dataset",
       "I check every row",
       "The pattern gets clearer",
       "The more I know"
     ],
-    "vocabulary": ["dataset", "row", "pattern", "clearer"]
+    "vocabulary": ["dataset", "row", "pattern", "clearer"],
+    "expressions": ["every row", "the more I know"]
   },
   {
     "title": "Trombone Air",
-    "style": "Slow jazz",
+    "style": "Original slow jazz practice",
     "focus": "Breath control and connected speech",
+    "activity": "Take one calm breath before each line and connect the words naturally.",
+    "studyLink": "",
     "lines": [
       "Breathe in slowly",
       "Shape every tone",
       "Leave a little silence",
       "Then make it your own"
     ],
-    "vocabulary": ["breathe", "shape", "tone", "silence"]
+    "vocabulary": ["breathe", "shape", "tone", "silence"],
+    "expressions": ["breathe in", "make it your own"]
+  },
+  {
+    "title": "Real Song Study: Here Comes the Sun",
+    "style": "The Beatles / acoustic pop",
+    "focus": "Warm vowels, simple present, hopeful tone",
+    "activity": "Open an official lyric/video source, listen once for mood, then collect five useful words without copying the full lyrics into the app.",
+    "studyLink": "https://www.youtube.com/results?search_query=Here+Comes+the+Sun+official",
+    "lines": [
+      "Practice phrase: The light returns after a long season.",
+      "Practice phrase: I can hear a brighter rhythm today."
+    ],
+    "vocabulary": ["sun", "light", "season", "return", "brighter"],
+    "expressions": ["here comes", "a long season"]
+  },
+  {
+    "title": "Real Song Study: What a Wonderful World",
+    "style": "Louis Armstrong / jazz standard",
+    "focus": "Slow diction, descriptive adjectives, emotional delivery",
+    "activity": "Listen for nouns and colors. Write your own short description of a natural landscape in English.",
+    "studyLink": "https://www.youtube.com/results?search_query=What+a+Wonderful+World+official",
+    "lines": [
+      "Practice phrase: I see green leaves and open water.",
+      "Practice phrase: The world sounds calm when I listen slowly."
+    ],
+    "vocabulary": ["wonderful", "world", "green", "sky", "listen"],
+    "expressions": ["I see", "when I listen"]
+  },
+  {
+    "title": "Real Song Study: Lean on Me",
+    "style": "Bill Withers / soul",
+    "focus": "Connected speech and supportive language",
+    "activity": "Listen for phrases about help and friendship. Then write two supportive sentences in English.",
+    "studyLink": "https://www.youtube.com/results?search_query=Lean+on+Me+official",
+    "lines": [
+      "Practice phrase: You can count on me when the work is hard.",
+      "Practice phrase: We learn better when we help each other."
+    ],
+    "vocabulary": ["lean", "help", "friend", "support", "together"],
+    "expressions": ["count on", "help each other"]
+  },
+  {
+    "title": "Real Song Study: Three Little Birds",
+    "style": "Bob Marley / reggae",
+    "focus": "Relaxed rhythm and reassurance",
+    "activity": "Focus on rhythm and repeated reassuring language. Create your own calm sentence for study days.",
+    "studyLink": "https://www.youtube.com/results?search_query=Three+Little+Birds+official",
+    "lines": [
+      "Practice phrase: Take your time and breathe through the phrase.",
+      "Practice phrase: Small steps can make the morning easier."
+    ],
+    "vocabulary": ["morning", "message", "worry", "smile", "easy"],
+    "expressions": ["take your time", "small steps"]
   }
 ]
