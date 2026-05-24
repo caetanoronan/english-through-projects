@@ -20,6 +20,7 @@
     <nav class="tabs" aria-label="Main sections">
       <button class="tab is-active" type="button" data-tab="home">Home</button>
       <button class="tab" type="button" data-tab="word">Word</button>
+      <button class="tab" type="button" data-tab="vocabulary">Vocabulary Bank</button>
       <button class="tab" type="button" data-tab="sentence">Sentence</button>
       <button class="tab" type="button" data-tab="reading">Reading</button>
       <button class="tab" type="button" data-tab="flashcards">Flashcards</button>
@@ -139,6 +140,44 @@
             <button class="primary-button" type="button" id="exportWordsButton">Export vocabulary</button>
             <label class="file-button" for="importWordsInput">Import vocabulary</label>
             <input id="importWordsInput" class="visually-hidden" type="file" accept="application/json,.json" />
+          </div>
+        </article>
+      </section>
+
+      <section class="tab-panel" id="vocabulary">
+        <div class="section-heading">
+          <p class="eyebrow">Reference bank</p>
+          <h2>Vocabulary Bank</h2>
+        </div>
+        <article class="feature-card">
+          <div class="form-grid">
+            <label>
+              Search
+              <input id="vocabularySearch" type="text" placeholder="Search word, meaning, example..." />
+            </label>
+            <label>
+              Theme
+              <select id="vocabularyFilter">
+                <option value="all">All themes</option>
+              </select>
+            </label>
+          </div>
+          <p class="translation" id="vocabularyCount">0 words</p>
+          <div class="table-wrap">
+            <table class="vocabulary-table">
+              <thead>
+                <tr>
+                  <th>Word</th>
+                  <th>Theme</th>
+                  <th>Translation</th>
+                  <th>Meaning</th>
+                  <th>Example</th>
+                  <th>Source</th>
+                  <th>Audio</th>
+                </tr>
+              </thead>
+              <tbody id="vocabularyTableBody"></tbody>
+            </table>
           </div>
         </article>
       </section>

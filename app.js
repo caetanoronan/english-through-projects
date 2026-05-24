@@ -178,6 +178,7 @@ function render() {
   });
 
   renderKnownWords();
+  renderVocabularyBank();
   renderFlashcard();
 }
 
@@ -201,6 +202,73 @@ function renderKnownWords() {
     option.value = word.term;
     datalist.append(option);
   });
+}
+
+function renderVocabularyBank() {
+  const tableBody = document.querySelector("#vocabularyTableBody");
+  const filter = document.querySelector("#vocabularyFilter");
+  const search = normalizeForSpeech(document.querySelector("#vocabularySearch").value);
+  const userTerms = new Set(state.userWords.map((word) => word.term.toLowerCase()));
+  const themes = [...new Set(words.map((word) => word.tag || "Personal"))].sort();
+  const selectedTheme = filter.value || "all";
+
+  syncVocabularyFilter(filter, themes, selectedTheme);
+  tableBody.innerHTML = "";
+
+  const filteredWords = words.filter((word) => {
+    const sourceText = [
+      word.term,
+      word.tag,
+      word.translation,
+      word.meaning,
+      word.example,
+    ]
+      .join(" ")
+      .toLowerCase();
+    const matchesSearch = !search || normalizeForSpeech(sourceText).includes(search);
+    const matchesTheme = selectedTheme === "all" || word.tag === selectedTheme;
+
+    return matchesSearch && matchesTheme;
+  });
+
+  document.querySelector("#vocabularyCount").textContent = `${filteredWords.length} words`;
+
+  filteredWords.forEach((word) => {
+    const row = document.createElement("tr");
+    const source = userTerms.has(word.term.toLowerCase()) ? "Personal" : "Base";
+
+    row.innerHTML = `
+      <td><strong>${escapeHtml(word.term)}</strong></td>
+      <td>${escapeHtml(word.tag || "Personal")}</td>
+      <td>${escapeHtml(word.translation || "")}</td>
+      <td>${escapeHtml(word.meaning || "")}</td>
+      <td>${escapeHtml(word.example || "")}</td>
+      <td><span class="source-pill">${source}</span></td>
+      <td><button class="icon-button" type="button" data-speak="${escapeHtml(word.term)}">Listen</button></td>
+    `;
+
+    tableBody.append(row);
+  });
+}
+
+function syncVocabularyFilter(filter, themes, selectedTheme) {
+  const currentOptions = [...filter.options].map((option) => option.value).join("|");
+  const nextOptions = ["all", ...themes].join("|");
+
+  if (currentOptions === nextOptions) {
+    return;
+  }
+
+  filter.innerHTML = '<option value="all">All themes</option>';
+
+  themes.forEach((theme) => {
+    const option = document.createElement("option");
+    option.value = theme;
+    option.textContent = theme;
+    filter.append(option);
+  });
+
+  filter.value = themes.includes(selectedTheme) ? selectedTheme : "all";
 }
 
 function renderFlashcard() {
@@ -329,6 +397,22 @@ function setupEvents() {
   document.querySelector("#importWordsInput").addEventListener("change", (event) => {
     importVocabulary(event.target.files[0]);
     event.target.value = "";
+  });
+
+  document.querySelector("#vocabularySearch").addEventListener("input", () => {
+    renderVocabularyBank();
+  });
+
+  document.querySelector("#vocabularyFilter").addEventListener("change", () => {
+    renderVocabularyBank();
+  });
+
+  document.querySelector("#vocabularyTableBody").addEventListener("click", (event) => {
+    const button = event.target.closest("[data-speak]");
+
+    if (button) {
+      speakEnglish(button.dataset.speak);
+    }
   });
 }
 
@@ -619,6 +703,15 @@ function normalizeForSpeech(value) {
 
 function normalizeSpaces(value) {
   return value.trim().replace(/\s+/g, " ");
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 startApp();

@@ -28,6 +28,7 @@ As palavras adicionadas pelo botao `Add Word` ficam salvas no `localStorage` do 
 - Vocabulario expandido por temas: programacao, GitHub, GIS, oceanografia, biologia marinha, pesquisa academica e musica.
 - Botao `Add Word` para adicionar palavras pessoais.
 - Exportacao e importacao do vocabulario pessoal em JSON.
+- Aba `Vocabulary Bank` com busca, filtro por tema e tabela de referencia do vocabulario.
 - Sugestao simples de correcao comparando a palavra digitada com o vocabulario existente.
 - Leitura em voz alta com a Web Speech API do navegador.
 - Aba Music com versos originais curtos para treino de ritmo, escuta e pronuncia.

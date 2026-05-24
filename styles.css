@@ -91,7 +91,8 @@ input {
 }
 
 input,
-textarea {
+textarea,
+select {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -99,7 +100,8 @@ textarea {
   background: rgba(255, 253, 249, 0.9);
 }
 
-input {
+input,
+select {
   min-height: clamp(44px, 4vw, 52px);
   padding: 0 clamp(12px, 1.4vw, 16px);
 }
@@ -112,6 +114,7 @@ textarea {
 }
 
 :root[data-theme="dark"] input,
+:root[data-theme="dark"] select,
 :root[data-theme="dark"] textarea,
 :root[data-theme="dark"] .lyrics-box,
 :root[data-theme="dark"] .speech-panel {
@@ -119,6 +122,7 @@ textarea {
 }
 
 input:focus,
+select:focus,
 textarea:focus {
   border-color: var(--accent);
   outline: 3px solid var(--accent-soft);
@@ -456,6 +460,79 @@ main {
 
 .speech-panel strong {
   color: var(--accent-strong);
+}
+
+.table-wrap {
+  width: 100%;
+  margin-top: clamp(16px, 2vw, 24px);
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.64);
+}
+
+:root[data-theme="dark"] .table-wrap {
+  background: rgba(9, 21, 31, 0.58);
+}
+
+.vocabulary-table {
+  width: 100%;
+  min-width: 980px;
+  border-collapse: collapse;
+}
+
+.vocabulary-table th,
+.vocabulary-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  text-align: left;
+  vertical-align: top;
+}
+
+.vocabulary-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--panel-2);
+  color: var(--accent-strong);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+}
+
+.vocabulary-table td {
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.vocabulary-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.source-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: 0.78rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.icon-button {
+  min-height: 36px;
+  margin: 0;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--accent-strong);
+  cursor: pointer;
+  font-weight: 900;
 }
 
 .form-grid {
