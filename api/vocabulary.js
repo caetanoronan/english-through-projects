@@ -99,23 +99,38 @@ function buildChildren(word) {
   }));
 }
 
-function buildPagePayload(word, parent) {
+function getVocabularyProperties(word) {
+  return {
+    Term: title(word.term),
+    Tag: select(word.tag),
+    Meaning: richText(word.meaning),
+    Translation: richText(word.translation),
+    Example: richText(word.example),
+    Source: select("App"),
+    Status: select("New")
+  };
+}
+
+function removeMissingProperties(properties, message) {
+  const nextProperties = { ...properties };
+  const matches = String(message || "").matchAll(/([A-Za-z0-9 _-]+) is not a property that exists/g);
+
+  for (const match of matches) {
+    delete nextProperties[match[1].trim()];
+  }
+
+  return nextProperties;
+}
+
+function buildPagePayload(word, parent, properties = getVocabularyProperties(word)) {
   return {
     parent,
-    properties: {
-      Term: title(word.term),
-      Tag: select(word.tag),
-      Meaning: richText(word.meaning),
-      Translation: richText(word.translation),
-      Example: richText(word.example),
-      Source: select("App"),
-      Status: select("New")
-    },
+    properties,
     children: buildChildren(word)
   };
 }
 
-async function sendToNotion(token, word, parent) {
+async function sendToNotion(token, word, parent, properties) {
   const response = await fetch("https://api.notion.com/v1/pages", {
     method: "POST",
     headers: {
@@ -123,11 +138,21 @@ async function sendToNotion(token, word, parent) {
       "Content-Type": "application/json",
       "Notion-Version": NOTION_VERSION
     },
-    body: JSON.stringify(buildPagePayload(word, parent))
+    body: JSON.stringify(buildPagePayload(word, parent, properties))
   });
   const data = await response.json();
 
   return { response, data };
+}
+
+async function sendWithAvailableProperties(token, word, parent, data) {
+  const reducedProperties = removeMissingProperties(getVocabularyProperties(word), data.message);
+
+  if (Object.keys(reducedProperties).length === Object.keys(getVocabularyProperties(word)).length) {
+    return null;
+  }
+
+  return sendToNotion(token, word, parent, reducedProperties);
 }
 
 async function createVocabularyPage(wordInput) {
@@ -160,6 +185,20 @@ async function createVocabularyPage(wordInput) {
     const fallback = await sendToNotion(token, word, { database_id: dataSourceId });
     response = fallback.response;
     data = fallback.data;
+  }
+
+  if (!response.ok && response.status === 400 && /is not a property that exists/i.test(data.message || "")) {
+    const availablePropertiesFallback = await sendWithAvailableProperties(
+      token,
+      word,
+      { database_id: dataSourceId },
+      data
+    );
+
+    if (availablePropertiesFallback) {
+      response = availablePropertiesFallback.response;
+      data = availablePropertiesFallback.data;
+    }
   }
 
   if (!response.ok) {
