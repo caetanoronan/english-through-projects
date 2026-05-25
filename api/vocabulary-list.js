@@ -102,6 +102,19 @@ async function queryNotion(token, dataSourceId, parent) {
   return { response, data };
 }
 
+async function retrieveDatabase(token, databaseId) {
+  const response = await fetch(`https://api.notion.com/v1/databases/${databaseId}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Notion-Version": NOTION_VERSION
+    }
+  });
+  const data = await response.json();
+
+  return { response, data };
+}
+
 async function listVocabularyWords() {
   const token = process.env.NOTION_TOKEN;
   const dataSourceId = process.env.NOTION_DATA_SOURCE_ID;
@@ -117,9 +130,18 @@ async function listVocabularyWords() {
   let { response, data } = await queryNotion(token, dataSourceId, "data_sources");
 
   if (!response.ok && [400, 404].includes(response.status)) {
-    const fallback = await queryNotion(token, dataSourceId, "databases");
-    response = fallback.response;
-    data = fallback.data;
+    const databaseLookup = await retrieveDatabase(token, dataSourceId);
+
+    if (databaseLookup.response.ok && databaseLookup.data.data_sources?.length) {
+      const sourceId = databaseLookup.data.data_sources[0].id;
+      const sourceFallback = await queryNotion(token, sourceId, "data_sources");
+
+      response = sourceFallback.response;
+      data = sourceFallback.data;
+    } else {
+      response = databaseLookup.response;
+      data = databaseLookup.data;
+    }
   }
 
   if (!response.ok) {
