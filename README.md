@@ -94,3 +94,7 @@ http://localhost:8000
 ## Publicacao
 
 O projeto esta publicado como site estatico e usa backend separado na Vercel para proteger tokens do Notion. Veja o passo a passo completo em [INTEGRACAO_NOTION.md](INTEGRACAO_NOTION.md).
+
+## Clonar para outras linguas
+
+Para criar versoes como `Spanish Through Projects`, `French Through Projects` ou outro idioma, use o guia [CLONAR_PARA_NOVA_LINGUA.md](CLONAR_PARA_NOVA_LINGUA.md).
