@@ -40,6 +40,23 @@ As palavras adicionadas pelo botao `Add Word` e a frase escrita em `Today's Sent
 - Fundo visual inspirado nos temas do projeto: ingles, codigo, GIS, oceano, musica e pesquisa.
 - Integracao preparada com Vercel `/api/vocabulary`, `/api/sentence` e Notion, mantendo fallback local.
 
+## Integracoes ativas
+
+- GitHub: repositorio versionado em `caetanoronan/english-through-projects`.
+- GitHub Pages: publicacao estatica do app.
+- Vercel: backend seguro para receber dados do app.
+- Notion: banco online para `Vocabulary Bank` e registros de `Today's Sentence`.
+- Web Speech API: leitura em voz alta e pratica de escuta/fala no navegador.
+- Cambridge Dictionary e Google: links externos de apoio para pesquisar palavras fora do vocabulario local.
+
+## Estado validado
+
+- `Add Word` sincroniza com o Notion via `/api/vocabulary`.
+- `Today's Sentence` sincroniza com o Notion via `/api/sentence`.
+- Se a API falhar, o app preserva dados no navegador usando `localStorage`.
+- O endpoint de vocabulario tolera colunas ausentes no Notion e salva os detalhes no corpo da pagina.
+- O endpoint de frases aceita uma tabela/database; se receber uma pagina comum, salva a frase como subpagina.
+
 ## Rotina minima diaria
 
 - 5 minutos lendo um texto tecnico curto.
@@ -65,13 +82,12 @@ http://localhost:8000
 
 ## Proximos passos
 
-- Publicar com GitHub Pages.
 - Evoluir o flashcard para repeticao espacada real.
-- Preparar backend na Vercel para salvar vocabulario e frases.
-- Integrar Notion com tokens protegidos no backend. Veja `INTEGRACAO_NOTION.md`.
-- Sincronizar palavras e frases adicionadas em banco online.
+- Refinar o banco de frases no Notion para virar tabela/database completa.
+- Padronizar colunas do Notion sem espacos extras nos nomes.
+- Criar rotina futura para reenviar automaticamente itens pendentes do `localStorage`.
 - Integrar um dicionario externo para correcao e definicoes automaticas.
 
-## Publicacao planejada
+## Publicacao
 
-O projeto sera publicado como site estatico no GitHub Pages. A integracao com Notion e Vercel deve ficar em uma etapa separada, usando backend protegido para evitar expor tokens no navegador.
+O projeto esta publicado como site estatico e usa backend separado na Vercel para proteger tokens do Notion. Veja o passo a passo completo em [INTEGRACAO_NOTION.md](INTEGRACAO_NOTION.md).

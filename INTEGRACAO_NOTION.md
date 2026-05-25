@@ -186,6 +186,96 @@ $body = @{
 Invoke-WebRequest -Uri 'https://english-through-projects.vercel.app/api/sentence' -Method POST -Headers @{ Origin='https://caetanoronan.github.io' } -ContentType 'application/json' -Body $body
 ```
 
+## Dificuldades encontradas e solucoes
+
+### 1. Variaveis da Vercel precisam ser criadas uma por vez
+
+O comando da Vercel exige uma variavel por chamada. Se dois comandos forem colados juntos, a CLI responde com erro de argumentos.
+
+Correto:
+
+```powershell
+vercel env rm NOTION_DATA_SOURCE_ID production
+vercel env add NOTION_TOKEN production
+vercel env add NOTION_DATA_SOURCE_ID production
+vercel env add NOTION_SENTENCES_DATA_SOURCE_ID production
+vercel deploy --prod
+```
+
+### 2. O token do Notion nao deve ir para o frontend
+
+O token fica apenas na Vercel como `NOTION_TOKEN`. O HTML e o JavaScript publico chamam somente a API da Vercel.
+
+### 3. O Notion precisa compartilhar o banco com a integracao
+
+Mesmo com token correto, a API falha se o banco nao estiver conectado a integracao `English Through Projects`.
+
+Erro comum:
+
+```text
+Could not find data_source
+```
+
+Solucao: abrir o banco no Notion, adicionar a conexao e permitir leitura/insercao/edicao.
+
+### 4. ID de pagina comum nao e igual a ID de database
+
+Na integracao de `Today's Sentence`, usamos inicialmente o ID de uma pagina comum. O Notion respondeu:
+
+```text
+Provided database_id ... is a page, not a database.
+```
+
+Solucao aplicada: o endpoint `/api/sentence` tenta salvar em tabela/database. Se receber uma pagina comum, salva a frase como subpagina. Para linhas com propriedades, use o ID de uma tabela/database real.
+
+### 5. Colunas do Notion precisam ter nomes exatos
+
+No `Vocabulary Bank`, a exportacao revelou uma coluna chamada `Meaning ` com espaco no final. Para a API, `Meaning ` e diferente de `Meaning`.
+
+Erro visto:
+
+```text
+Meaning is not a property that exists.
+```
+
+Solucoes:
+
+- renomear a coluna no Notion para `Meaning`, sem espaco final;
+- manter `Example` e `Source` criadas;
+- o backend agora tambem tenta salvar a palavra mesmo se alguma coluna estiver ausente.
+
+### 6. Teste real do vocabulario
+
+Teste validado:
+
+```text
+Term: sediment plume
+Tag: Coastal Oceanography
+Meaning: A visible cloud of suspended sediment carried by water into a coastal area.
+Translation: pluma de sedimentos
+Example: The satellite image showed a sediment plume near the river mouth.
+```
+
+Resultado esperado:
+
+```text
+201 OK
+```
+
+### 7. Teste real da frase diaria
+
+Teste validado:
+
+```text
+Today I connected my daily English sentence to Notion.
+```
+
+Resultado esperado:
+
+```text
+201 OK
+```
+
 ## Observacao
 
 O app continua funcionando sem backend usando JSON estatico e armazenamento local. A integracao com Notion melhora persistencia e revisao, mas nao bloqueia o uso diario.
