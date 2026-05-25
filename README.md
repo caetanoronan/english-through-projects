@@ -47,6 +47,7 @@ As palavras adicionadas pelo botao `Add Word` e a frase escrita em `Today's Sent
 - Vercel: backend seguro para receber dados do app.
 - Notion: banco online para `Vocabulary Bank` e registros de `Today's Sentence`.
 - Web Speech API: leitura em voz alta e pratica de escuta/fala no navegador.
+- PWA: manifest, icones e service worker para instalacao e abertura offline do app shell.
 - Cambridge Dictionary e Google: links externos de apoio para pesquisar palavras fora do vocabulario local.
 
 ## Estado validado
@@ -54,6 +55,7 @@ As palavras adicionadas pelo botao `Add Word` e a frase escrita em `Today's Sent
 - `Add Word` sincroniza com o Notion via `/api/vocabulary`.
 - `Today's Sentence` sincroniza com o Notion via `/api/sentence`.
 - Se a API falhar, o app preserva dados no navegador usando `localStorage`.
+- O app pode ser instalado como PWA em navegadores compativeis.
 - O endpoint de vocabulario tolera colunas ausentes no Notion e salva os detalhes no corpo da pagina.
 - O endpoint de frases aceita uma tabela/database; se receber uma pagina comum, salva a frase como subpagina.
 

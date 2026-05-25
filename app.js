@@ -827,4 +827,17 @@ function escapeHtml(value) {
     .replace(/'/g, "&#039;");
 }
 
+function registerServiceWorker() {
+  if (!("serviceWorker" in navigator)) {
+    return;
+  }
+
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js").catch(() => {
+      showToast("Offline mode could not be enabled.");
+    });
+  });
+}
+
+registerServiceWorker();
 startApp();
