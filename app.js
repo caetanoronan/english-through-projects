@@ -1,6 +1,7 @@
 const storageKey = "englishThroughProjects";
 const themeKey = "englishThroughProjectsTheme";
 const onlineVocabularyEndpoint = window.APP_VOCABULARY_ENDPOINT || "https://english-through-projects.vercel.app/api/vocabulary";
+const onlineVocabularyListEndpoint = window.APP_VOCABULARY_LIST_ENDPOINT || "https://english-through-projects.vercel.app/api/vocabulary-list";
 const onlineSentenceEndpoint = window.APP_SENTENCE_ENDPOINT || "https://english-through-projects.vercel.app/api/sentence";
 const todayKey = new Date().toISOString().slice(0, 10);
 
@@ -54,6 +55,7 @@ const defaultState = {
   userWords: [],
   pendingSyncWords: [],
   pendingSyncSentences: [],
+  onlineWords: [],
   dailySentence: "",
   musicNotes: "",
   generalNotes: "",
@@ -70,14 +72,16 @@ async function startApp() {
 }
 
 async function loadContent() {
-  const [baseWords, baseReadings, baseFlashcards, baseSongs] = await Promise.all([
+  const [baseWords, baseReadings, baseFlashcards, baseSongs, onlineWords] = await Promise.all([
     loadJson("data/vocabulary.json", fallbackData.words),
     loadJson("data/readings.json", fallbackData.readings),
     loadJson("data/flashcards.json", fallbackData.flashcards),
     loadJson("data/music.json", fallbackData.songs),
+    loadOnlineVocabulary(),
   ]);
 
-  words = [...baseWords, ...state.userWords];
+  state.onlineWords = onlineWords;
+  words = mergeVocabulary(baseWords, onlineWords, state.userWords);
   readings = baseReadings;
   songs = baseSongs;
   flashcards = words.map((word) => ({
@@ -89,6 +93,52 @@ async function loadContent() {
   if (!flashcards.length) {
     flashcards = baseFlashcards;
   }
+}
+
+async function loadOnlineVocabulary() {
+  try {
+    const response = await fetch(onlineVocabularyListEndpoint);
+    const result = await response.json();
+
+    if (!response.ok || !result.ok || !Array.isArray(result.words)) {
+      throw new Error(result.message || "Could not load online vocabulary");
+    }
+
+    return result.words;
+  } catch (error) {
+    return state.onlineWords || [];
+  }
+}
+
+function mergeVocabulary(...groups) {
+  const seenTerms = new Set();
+  const mergedWords = [];
+
+  groups.flat().forEach((word) => {
+    const term = normalizeSpaces(word.term || "");
+
+    if (!term) {
+      return;
+    }
+
+    const key = term.toLowerCase();
+
+    if (seenTerms.has(key)) {
+      return;
+    }
+
+    seenTerms.add(key);
+    mergedWords.push({
+      term,
+      tag: normalizeSpaces(word.tag || "") || "Personal",
+      meaning: normalizeSpaces(word.meaning || ""),
+      translation: normalizeSpaces(word.translation || ""),
+      example: normalizeSpaces(word.example || ""),
+      source: word.source || "Base",
+    });
+  });
+
+  return mergedWords;
 }
 
 async function loadJson(path, fallback) {
@@ -124,6 +174,7 @@ function loadState() {
       userWords: saved.userWords || [],
       pendingSyncWords: saved.pendingSyncWords || [],
       pendingSyncSentences: saved.pendingSyncSentences || [],
+      onlineWords: saved.onlineWords || [],
       generalNotes: saved.generalNotes || "",
     };
   }
@@ -134,6 +185,7 @@ function loadState() {
     userWords: saved.userWords || [],
     pendingSyncWords: saved.pendingSyncWords || [],
     pendingSyncSentences: saved.pendingSyncSentences || [],
+    onlineWords: saved.onlineWords || [],
   };
 }
 
@@ -238,6 +290,7 @@ function renderVocabularyBank() {
   const filter = document.querySelector("#vocabularyFilter");
   const search = normalizeForSpeech(document.querySelector("#vocabularySearch").value);
   const userTerms = new Set(state.userWords.map((word) => word.term.toLowerCase()));
+  const onlineTerms = new Set((state.onlineWords || []).map((word) => word.term.toLowerCase()));
   const themes = [...new Set(words.map((word) => word.tag || "Personal"))].sort();
   const selectedTheme = filter.value || "all";
 
@@ -265,7 +318,8 @@ function renderVocabularyBank() {
 
   filteredWords.forEach((word) => {
     const row = document.createElement("tr");
-    const source = userTerms.has(word.term.toLowerCase()) ? "Personal" : "Base";
+    const termKey = word.term.toLowerCase();
+    const source = userTerms.has(termKey) ? "Personal" : onlineTerms.has(termKey) ? "Notion" : "Base";
 
     row.innerHTML = `
       <td><strong>${escapeHtml(word.term)}</strong></td>

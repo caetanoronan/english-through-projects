@@ -53,6 +53,7 @@ As palavras adicionadas pelo botao `Add Word` e a frase escrita em `Today's Sent
 ## Estado validado
 
 - `Add Word` sincroniza com o Notion via `/api/vocabulary`.
+- O app carrega palavras compartilhadas do Notion via `/api/vocabulary-list`.
 - `Today's Sentence` sincroniza com o Notion via `/api/sentence`.
 - Se a API falhar, o app preserva dados no navegador usando `localStorage`.
 - O app pode ser instalado como PWA em navegadores compativeis.

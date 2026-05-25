@@ -5,7 +5,7 @@ Este documento descreve a integracao do English Through Projects com Notion usan
 ## Arquitetura proposta
 
 - GitHub Pages publica o HTML, CSS, JavaScript e arquivos JSON estaticos.
-- Vercel hospeda APIs em `/api/vocabulary` e `/api/sentence`.
+- Vercel hospeda APIs em `/api/vocabulary`, `/api/vocabulary-list` e `/api/sentence`.
 - A API da Vercel recebe novas palavras e frases criadas no app.
 - A funcao da Vercel conversa com a API do Notion usando variaveis secretas.
 - O Notion funciona como mural/banco real, com permissoes controladas.
@@ -31,6 +31,7 @@ Browser -> Notion com token publico
 
 ```text
 https://english-through-projects.vercel.app/api/vocabulary
+https://english-through-projects.vercel.app/api/vocabulary-list
 https://english-through-projects.vercel.app/api/sentence
 ```
 
@@ -39,11 +40,12 @@ Se o projeto na Vercel tiver outro nome de dominio, defina o endpoint antes de c
 ```html
 <script>
   window.APP_VOCABULARY_ENDPOINT = "https://seu-projeto.vercel.app/api/vocabulary";
+  window.APP_VOCABULARY_LIST_ENDPOINT = "https://seu-projeto.vercel.app/api/vocabulary-list";
   window.APP_SENTENCE_ENDPOINT = "https://seu-projeto.vercel.app/api/sentence";
 </script>
 ```
 
-O app tenta enviar novas palavras e a frase diaria para esses endpoints. Se algum endpoint ainda nao estiver configurado, o conteudo continua salvo localmente no navegador.
+O app tenta enviar novas palavras e a frase diaria para esses endpoints. Ao abrir, tambem busca palavras compartilhadas no Notion via `/api/vocabulary-list`. Se algum endpoint ainda nao estiver configurado, o conteudo continua salvo localmente no navegador.
 
 ## Variaveis secretas na Vercel
 
@@ -119,8 +121,8 @@ Se a API da Vercel falhar, o app:
 4. Criar uma integracao interna no Notion.
 5. Compartilhar as bases do Notion com essa integracao.
 6. Configurar `NOTION_TOKEN`, `NOTION_DATA_SOURCE_ID` e `NOTION_SENTENCES_DATA_SOURCE_ID` na Vercel.
-7. Criar endpoints `/api/vocabulary` e `/api/sentence`.
-8. Atualizar o app para enviar novas palavras e frases para a API.
+7. Criar endpoints `/api/vocabulary`, `/api/vocabulary-list` e `/api/sentence`.
+8. Atualizar o app para enviar novas palavras e frases para a API, alem de carregar palavras compartilhadas do Notion.
 9. Manter `localStorage` como fallback offline.
 
 ## Criar a integracao interna do Notion
@@ -173,6 +175,12 @@ $body = @{
 } | ConvertTo-Json
 
 Invoke-WebRequest -Uri 'https://english-through-projects.vercel.app/api/vocabulary' -Method POST -Headers @{ Origin='https://caetanoronan.github.io' } -ContentType 'application/json' -Body $body
+```
+
+GET real para carregar vocabulario compartilhado:
+
+```powershell
+Invoke-WebRequest -Uri 'https://english-through-projects.vercel.app/api/vocabulary-list' -Headers @{ Origin='https://caetanoronan.github.io' }
 ```
 
 POST real para `Today's Sentence`:

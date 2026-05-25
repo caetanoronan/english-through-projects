@@ -3,6 +3,9 @@
     "api/vocabulary.js": {
       "maxDuration": 10
     },
+    "api/vocabulary-list.js": {
+      "maxDuration": 10
+    },
     "api/sentence.js": {
       "maxDuration": 10
     }
