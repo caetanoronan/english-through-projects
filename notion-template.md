@@ -84,6 +84,51 @@ Status:
 - Reviewed
 - Needs review
 
+## Notes
+
+Nome sugerido: `English Through Projects - Notes`
+
+Este banco recebe notas gerais e estudos musicais salvos nas abas `Notes` e `Music`.
+
+### Visao principal
+
+Tipo: Table
+
+Agrupar ou filtrar por: `Category`, `Status` ou `Source`
+
+### Propriedades esperadas pela API
+
+| Propriedade | Tipo | Uso |
+| --- | --- | --- |
+| Title | Title | Titulo curto da nota |
+| Note | Text | Conteudo da nota |
+| Category | Select | General, Music, Lyrics, Project, Vocabulary |
+| Link | URL | Link de letra, fonte ou estudo |
+| Audio Link | URL | Link de audio ou video para ouvir |
+| Source | Select | App, Manual |
+| Status | Select | New, Reviewed |
+| Created Date | Date | Data enviada pelo app |
+
+### Opcoes sugeridas
+
+Category:
+
+- General
+- Music
+- Lyrics
+- Project
+- Vocabulary
+
+Source:
+
+- App
+- Manual
+
+Status:
+
+- New
+- Reviewed
+
 ## Fluxo seguro
 
 ```text
@@ -96,6 +141,8 @@ O ID do banco de vocabulario deve ficar apenas na Vercel em `NOTION_DATA_SOURCE_
 
 O ID do banco de frases deve ficar apenas na Vercel em `NOTION_SENTENCES_DATA_SOURCE_ID`.
 
+O ID do banco de notas deve ficar apenas na Vercel em `NOTION_NOTES_DATA_SOURCE_ID`.
+
 ## Fallback
 
-Se a API estiver indisponivel, o app continua salvando palavras e frases no navegador via `localStorage`. Depois, esses dados podem ser exportados ou sincronizados em uma etapa futura.
+Se a API estiver indisponivel, o app continua salvando palavras, frases, notas e musicas no navegador via `localStorage`. Depois, esses dados podem ser exportados ou sincronizados em uma etapa futura.

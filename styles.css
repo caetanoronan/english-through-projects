@@ -433,6 +433,12 @@ main {
   font-weight: 900;
 }
 
+.music-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+}
+
 :root[data-theme="dark"] .translation,
 :root[data-theme="dark"] .summary-card strong,
 :root[data-theme="dark"] .flashcard h3,
@@ -779,6 +785,7 @@ label textarea {
   #reading .feature-card .button-row,
   #flashcards .feature-card .button-row,
   #music .feature-card .button-row,
+  #music .feature-card .music-links,
   #music .feature-card textarea,
   #music .feature-card > button {
     grid-column: 2;

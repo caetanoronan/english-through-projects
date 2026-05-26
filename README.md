@@ -20,8 +20,9 @@ O conteudo base fica separado em arquivos JSON:
 - `data/vocabulary.json`
 - `data/readings.json`
 - `data/flashcards.json`
+- `data/music.json`
 
-As palavras adicionadas pelo botao `Add Word` e a frase escrita em `Today's Sentence` ficam salvas no `localStorage` do navegador. Quando a Vercel e o Notion estao configurados, esses registros tambem podem ser enviados para bancos online protegidos.
+As palavras adicionadas pelo botao `Add Word`, a frase escrita em `Today's Sentence`, notas gerais e estudos musicais ficam salvos no `localStorage` do navegador. Quando a Vercel e o Notion estao configurados, esses registros tambem podem ser enviados para bancos online protegidos.
 
 ## Recursos atuais
 
@@ -34,18 +35,18 @@ As palavras adicionadas pelo botao `Add Word` e a frase escrita em `Today's Sent
 - Flashcards gerados automaticamente a partir do `Vocabulary Bank`.
 - Sugestao simples de correcao comparando a palavra digitada com o vocabulario existente.
 - Leitura em voz alta com a Web Speech API do navegador.
-- Aba Music com song study cards, versos originais, links de estudo e vocabulario musical.
+- Aba Music com song study cards, versos originais, links de estudo, links para ouvir e cadastro de novas musicas.
 - Aba Reading com `Listen` e `Record voice` para comparar sua fala com o texto.
 - Layout responsivo com grids fluidos, tema claro/escuro e titulos com gradiente colorido.
 - Fundo visual inspirado nos temas do projeto: ingles, codigo, GIS, oceano, musica e pesquisa.
-- Integracao preparada com Vercel `/api/vocabulary`, `/api/sentence` e Notion, mantendo fallback local.
+- Integracao preparada com Vercel `/api/vocabulary`, `/api/sentence`, `/api/notes` e Notion, mantendo fallback local.
 
 ## Integracoes ativas
 
 - GitHub: repositorio versionado em `caetanoronan/english-through-projects`.
 - GitHub Pages: publicacao estatica do app.
 - Vercel: backend seguro para receber dados do app.
-- Notion: banco online para `Vocabulary Bank` e registros de `Today's Sentence`.
+- Notion: banco online para `Vocabulary Bank`, registros de `Today's Sentence` e `My Notes`.
 - Web Speech API: leitura em voz alta e pratica de escuta/fala no navegador.
 - PWA: manifest, icones e service worker para instalacao e abertura offline do app shell.
 - Cambridge Dictionary e Google: links externos de apoio para pesquisar palavras fora do vocabulario local.
@@ -55,6 +56,7 @@ As palavras adicionadas pelo botao `Add Word` e a frase escrita em `Today's Sent
 - `Add Word` sincroniza com o Notion via `/api/vocabulary`.
 - O app carrega palavras compartilhadas do Notion via `/api/vocabulary-list`.
 - `Today's Sentence` sincroniza com o Notion via `/api/sentence`.
+- `My Notes` e estudos musicais sincronizam com o Notion via `/api/notes` quando `NOTION_NOTES_DATA_SOURCE_ID` esta configurado.
 - Se a API falhar, o app preserva dados no navegador usando `localStorage`.
 - O app pode ser instalado como PWA em navegadores compativeis.
 - O endpoint de vocabulario tolera colunas ausentes no Notion e salva os detalhes no corpo da pagina.

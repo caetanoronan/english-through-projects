@@ -263,13 +263,51 @@
           <div class="lyrics-box" id="musicLines"></div>
           <p class="translation" id="musicVocabulary">shoreline, tide, rhythm, flow</p>
           <p class="translation" id="musicExpressions">beside the water, let the rhythm flow</p>
-          <a class="study-link" id="musicStudyLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Open study source</a>
+          <div class="music-links">
+            <a class="study-link" id="musicStudyLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Open lyrics/source</a>
+            <a class="study-link" id="musicAudioLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Listen to song</a>
+          </div>
           <div class="button-row">
             <button class="primary-button" type="button" id="newMusicButton">New song</button>
             <button class="secondary-button" type="button" id="speakMusicButton">Listen</button>
           </div>
           <textarea id="musicNotes" rows="5" placeholder="groove, chord progression, breath control..."></textarea>
           <button class="primary-button" type="button" id="saveMusicButton">Save music notes</button>
+        </article>
+
+        <article class="feature-card add-word-card">
+          <h3>Add Music Study</h3>
+          <div class="form-grid">
+            <label>
+              Song title
+              <input id="addMusicTitle" type="text" placeholder="e.g. Here Comes the Sun" />
+            </label>
+            <label>
+              Artist / style
+              <input id="addMusicStyle" type="text" placeholder="e.g. The Beatles / acoustic pop" />
+            </label>
+            <label>
+              Study focus
+              <input id="addMusicFocus" type="text" placeholder="e.g. warm vowels, rhythm, expressions" />
+            </label>
+            <label>
+              Lyrics or study link
+              <input id="addMusicStudyLink" type="url" placeholder="https://..." />
+            </label>
+            <label>
+              Audio/video link
+              <input id="addMusicAudioLink" type="url" placeholder="https://..." />
+            </label>
+            <label>
+              Useful vocabulary
+              <input id="addMusicVocabulary" type="text" placeholder="sun, light, rhythm, brighter" />
+            </label>
+          </div>
+          <label>
+            Practice lines or short notes
+            <textarea id="addMusicLines" rows="4" placeholder="Write short practice phrases or your own summary."></textarea>
+          </label>
+          <button class="primary-button" type="button" id="addMusicButton">Add music study</button>
         </article>
       </section>
 
@@ -279,6 +317,9 @@
           <h2>My Notes</h2>
         </div>
         <article class="feature-card">
+          <div class="button-row">
+            <a class="link-button" href="https://www.notion.so/36cd14c78a56803b93e5cd36a8d43102?v=36cd14c78a568003b4f1000ceef954b7" target="_blank" rel="noopener noreferrer">Open Notion notes</a>
+          </div>
           <textarea id="generalNotes" rows="10" placeholder="Useful terms, sentences, article ideas, doubts..."></textarea>
           <button class="primary-button" type="button" id="saveNotesButton">Save notes</button>
         </article>

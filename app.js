@@ -3,6 +3,7 @@ const themeKey = "englishThroughProjectsTheme";
 const onlineVocabularyEndpoint = window.APP_VOCABULARY_ENDPOINT || "https://english-through-projects.vercel.app/api/vocabulary";
 const onlineVocabularyListEndpoint = window.APP_VOCABULARY_LIST_ENDPOINT || "https://english-through-projects.vercel.app/api/vocabulary-list";
 const onlineSentenceEndpoint = window.APP_SENTENCE_ENDPOINT || "https://english-through-projects.vercel.app/api/sentence";
+const onlineNotesEndpoint = window.APP_NOTES_ENDPOINT || "https://english-through-projects.vercel.app/api/notes";
 const todayKey = new Date().toISOString().slice(0, 10);
 
 let words = [];
@@ -55,7 +56,9 @@ const defaultState = {
   userWords: [],
   pendingSyncWords: [],
   pendingSyncSentences: [],
+  pendingSyncNotes: [],
   onlineWords: [],
+  userSongs: [],
   dailySentence: "",
   musicNotes: "",
   generalNotes: "",
@@ -83,7 +86,7 @@ async function loadContent() {
   state.onlineWords = onlineWords;
   words = mergeVocabulary(baseWords, onlineWords, state.userWords);
   readings = baseReadings;
-  songs = baseSongs;
+  songs = [...baseSongs, ...(state.userSongs || []).map(normalizeImportedSong).filter(Boolean)];
   flashcards = words.map((word) => ({
     front: word.term,
     back: `${word.translation || "Sem traducao"}: ${word.meaning}`,
@@ -174,7 +177,9 @@ function loadState() {
       userWords: saved.userWords || [],
       pendingSyncWords: saved.pendingSyncWords || [],
       pendingSyncSentences: saved.pendingSyncSentences || [],
+      pendingSyncNotes: saved.pendingSyncNotes || [],
       onlineWords: saved.onlineWords || [],
+      userSongs: saved.userSongs || [],
       generalNotes: saved.generalNotes || "",
     };
   }
@@ -185,7 +190,9 @@ function loadState() {
     userWords: saved.userWords || [],
     pendingSyncWords: saved.pendingSyncWords || [],
     pendingSyncSentences: saved.pendingSyncSentences || [],
+    pendingSyncNotes: saved.pendingSyncNotes || [],
     onlineWords: saved.onlineWords || [],
+    userSongs: saved.userSongs || [],
   };
 }
 
@@ -262,16 +269,24 @@ function renderSongLines(song) {
 }
 
 function renderMusicLink(song) {
-  const link = document.querySelector("#musicStudyLink");
+  const studyLink = document.querySelector("#musicStudyLink");
+  const audioLink = document.querySelector("#musicAudioLink");
 
   if (!song.studyLink) {
-    link.hidden = true;
-    link.removeAttribute("href");
-    return;
+    studyLink.hidden = true;
+    studyLink.removeAttribute("href");
+  } else {
+    studyLink.hidden = false;
+    studyLink.href = song.studyLink;
   }
 
-  link.hidden = false;
-  link.href = song.studyLink;
+  if (!song.audioLink) {
+    audioLink.hidden = true;
+    audioLink.removeAttribute("href");
+  } else {
+    audioLink.hidden = false;
+    audioLink.href = song.audioLink;
+  }
 }
 
 function renderKnownWords() {
@@ -461,6 +476,17 @@ function setupEvents() {
     state.musicNotes = document.querySelector("#musicNotes").value.trim();
     state.tasks.music = Boolean(state.musicNotes);
     saveState("Music notes saved");
+    syncNote({
+      title: `Music study - ${songs[state.musicIndex % songs.length].title}`,
+      note: state.musicNotes,
+      category: "Music",
+      link: songs[state.musicIndex % songs.length].studyLink || "",
+      audioLink: songs[state.musicIndex % songs.length].audioLink || "",
+    });
+  });
+
+  document.querySelector("#addMusicButton").addEventListener("click", () => {
+    addMusicStudy();
   });
 
   document.querySelector("#newMusicButton").addEventListener("click", () => {
@@ -476,6 +502,11 @@ function setupEvents() {
   document.querySelector("#saveNotesButton").addEventListener("click", () => {
     state.generalNotes = document.querySelector("#generalNotes").value.trim();
     saveState("Notes saved");
+    syncNote({
+      title: `General note - ${todayKey}`,
+      note: state.generalNotes,
+      category: "General",
+    });
   });
 
   document.querySelector("#checkWordButton").addEventListener("click", () => {
@@ -639,6 +670,100 @@ async function syncDailySentence(text) {
   }
 }
 
+function addMusicStudy() {
+  const newSong = {
+    title: normalizeSpaces(document.querySelector("#addMusicTitle").value),
+    style: normalizeSpaces(document.querySelector("#addMusicStyle").value) || "Song study",
+    focus: normalizeSpaces(document.querySelector("#addMusicFocus").value) || "Listening and vocabulary",
+    activity: "Open the lyrics/source link, listen to the song, then collect useful words and expressions.",
+    studyLink: normalizeUrl(document.querySelector("#addMusicStudyLink").value),
+    audioLink: normalizeUrl(document.querySelector("#addMusicAudioLink").value),
+    lines: splitLines(document.querySelector("#addMusicLines").value),
+    vocabulary: splitCommaList(document.querySelector("#addMusicVocabulary").value),
+    expressions: [],
+  };
+
+  if (!newSong.title || (!newSong.studyLink && !newSong.audioLink)) {
+    showToast("Preencha o titulo e pelo menos um link da musica.");
+    return;
+  }
+
+  if (!newSong.lines.length) {
+    newSong.lines = ["Practice phrase: listen once, then write useful words from this song."];
+  }
+
+  if (!newSong.vocabulary.length) {
+    newSong.vocabulary = ["listening", "lyrics", "rhythm"];
+  }
+
+  state.userSongs.push(newSong);
+  songs.push(newSong);
+  state.musicIndex = songs.length - 1;
+
+  document.querySelector("#addMusicTitle").value = "";
+  document.querySelector("#addMusicStyle").value = "";
+  document.querySelector("#addMusicFocus").value = "";
+  document.querySelector("#addMusicStudyLink").value = "";
+  document.querySelector("#addMusicAudioLink").value = "";
+  document.querySelector("#addMusicLines").value = "";
+  document.querySelector("#addMusicVocabulary").value = "";
+
+  saveState("Music study added");
+  syncNote({
+    title: `Music link - ${newSong.title}`,
+    note: [
+      `Style: ${newSong.style}`,
+      `Focus: ${newSong.focus}`,
+      `Vocabulary: ${newSong.vocabulary.join(", ")}`,
+      `Practice lines: ${newSong.lines.join(" / ")}`,
+    ].join("\n"),
+    category: "Lyrics",
+    link: newSong.studyLink,
+    audioLink: newSong.audioLink,
+  });
+}
+
+async function syncNote(noteInput) {
+  const note = {
+    title: normalizeSpaces(noteInput.title || `Note - ${todayKey}`),
+    note: String(noteInput.note || "").trim(),
+    category: normalizeSpaces(noteInput.category || "General"),
+    link: normalizeUrl(noteInput.link || ""),
+    audioLink: normalizeUrl(noteInput.audioLink || ""),
+    date: todayKey,
+  };
+
+  if (!note.note && !note.link && !note.audioLink) {
+    return;
+  }
+
+  try {
+    const response = await fetch(onlineNotesEndpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(note),
+    });
+    const result = await response.json();
+
+    if (!response.ok || !result.ok) {
+      throw new Error(result.message || "Online note sync failed");
+    }
+
+    showToast("Note synced with Notion");
+  } catch (error) {
+    const alreadyPending = state.pendingSyncNotes.some(
+      (pendingNote) => pendingNote.title === note.title && pendingNote.note === note.note,
+    );
+
+    if (!alreadyPending) {
+      state.pendingSyncNotes.push(note);
+      localStorage.setItem(storageKey, JSON.stringify(state));
+    }
+
+    showToast("Note saved locally. Notion sync pending.");
+  }
+}
+
 function exportVocabulary() {
   const backup = {
     app: "English Through Projects",
@@ -731,6 +856,58 @@ function normalizeImportedWord(word) {
   }
 
   return importedWord;
+}
+
+function normalizeImportedSong(song) {
+  if (!song || typeof song !== "object") {
+    return null;
+  }
+
+  const title = normalizeSpaces(String(song.title || ""));
+
+  if (!title) {
+    return null;
+  }
+
+  return {
+    title,
+    style: normalizeSpaces(String(song.style || "Song study")),
+    focus: normalizeSpaces(String(song.focus || "Listening and vocabulary")),
+    activity: normalizeSpaces(String(song.activity || "Open the links and collect useful English.")),
+    studyLink: normalizeUrl(song.studyLink || ""),
+    audioLink: normalizeUrl(song.audioLink || ""),
+    lines: Array.isArray(song.lines) ? song.lines.map(String).map(normalizeSpaces).filter(Boolean) : [],
+    vocabulary: Array.isArray(song.vocabulary) ? song.vocabulary.map(String).map(normalizeSpaces).filter(Boolean) : [],
+    expressions: Array.isArray(song.expressions) ? song.expressions.map(String).map(normalizeSpaces).filter(Boolean) : [],
+  };
+}
+
+function splitLines(value) {
+  return String(value || "")
+    .split(/\r?\n/)
+    .map(normalizeSpaces)
+    .filter(Boolean);
+}
+
+function splitCommaList(value) {
+  return String(value || "")
+    .split(",")
+    .map(normalizeSpaces)
+    .filter(Boolean);
+}
+
+function normalizeUrl(value) {
+  const url = String(value || "").trim();
+
+  if (!url) {
+    return "";
+  }
+
+  if (/^https?:\/\//i.test(url)) {
+    return url;
+  }
+
+  return `https://${url}`;
 }
 
 function showSpellingSuggestion(showPositiveMessage = true) {
