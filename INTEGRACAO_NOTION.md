@@ -5,7 +5,7 @@ Este documento descreve a integracao do English Through Projects com Notion usan
 ## Arquitetura proposta
 
 - GitHub Pages publica o HTML, CSS, JavaScript e arquivos JSON estaticos.
-- Vercel hospeda APIs em `/api/vocabulary`, `/api/vocabulary-list`, `/api/sentence` e `/api/notes`.
+- Vercel hospeda APIs em `/api/vocabulary`, `/api/vocabulary-list`, `/api/sentence`, `/api/notes` e `/api/music-list`.
 - A API da Vercel recebe novas palavras, frases, notas e estudos musicais criados no app.
 - A funcao da Vercel conversa com a API do Notion usando variaveis secretas.
 - O Notion funciona como mural/banco real, com permissoes controladas.
@@ -34,6 +34,7 @@ https://english-through-projects.vercel.app/api/vocabulary
 https://english-through-projects.vercel.app/api/vocabulary-list
 https://english-through-projects.vercel.app/api/sentence
 https://english-through-projects.vercel.app/api/notes
+https://english-through-projects.vercel.app/api/music-list
 ```
 
 Se o projeto na Vercel tiver outro nome de dominio, defina o endpoint antes de carregar `app.js`:
@@ -44,10 +45,11 @@ Se o projeto na Vercel tiver outro nome de dominio, defina o endpoint antes de c
   window.APP_VOCABULARY_LIST_ENDPOINT = "https://seu-projeto.vercel.app/api/vocabulary-list";
   window.APP_SENTENCE_ENDPOINT = "https://seu-projeto.vercel.app/api/sentence";
   window.APP_NOTES_ENDPOINT = "https://seu-projeto.vercel.app/api/notes";
+  window.APP_MUSIC_LIST_ENDPOINT = "https://seu-projeto.vercel.app/api/music-list";
 </script>
 ```
 
-O app tenta enviar novas palavras, a frase diaria, notas gerais e estudos musicais para esses endpoints. Ao abrir, tambem busca palavras compartilhadas no Notion via `/api/vocabulary-list`. Se algum endpoint ainda nao estiver configurado, o conteudo continua salvo localmente no navegador.
+O app tenta enviar novas palavras, a frase diaria, notas gerais e estudos musicais para esses endpoints. Ao abrir, tambem busca palavras compartilhadas no Notion via `/api/vocabulary-list` e musicas compartilhadas via `/api/music-list`. Se algum endpoint ainda nao estiver configurado, o conteudo continua salvo localmente no navegador.
 
 ## Variaveis secretas na Vercel
 
@@ -137,8 +139,8 @@ Se a API da Vercel falhar, o app:
 4. Criar uma integracao interna no Notion.
 5. Compartilhar as bases do Notion com essa integracao.
 6. Configurar `NOTION_TOKEN`, `NOTION_DATA_SOURCE_ID`, `NOTION_SENTENCES_DATA_SOURCE_ID` e `NOTION_NOTES_DATA_SOURCE_ID` na Vercel.
-7. Criar endpoints `/api/vocabulary`, `/api/vocabulary-list`, `/api/sentence` e `/api/notes`.
-8. Atualizar o app para enviar novas palavras, frases, notas e musicas para a API, alem de carregar palavras compartilhadas do Notion.
+7. Criar endpoints `/api/vocabulary`, `/api/vocabulary-list`, `/api/sentence`, `/api/notes` e `/api/music-list`.
+8. Atualizar o app para enviar novas palavras, frases, notas e musicas para a API, alem de carregar palavras e musicas compartilhadas do Notion.
 9. Manter `localStorage` como fallback offline.
 
 ## Criar a integracao interna do Notion

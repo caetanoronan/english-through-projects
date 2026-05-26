@@ -39,7 +39,7 @@ As palavras adicionadas pelo botao `Add Word`, a frase escrita em `Today's Sente
 - Aba Reading com `Listen` e `Record voice` para comparar sua fala com o texto.
 - Layout responsivo com grids fluidos, tema claro/escuro e titulos com gradiente colorido.
 - Fundo visual inspirado nos temas do projeto: ingles, codigo, GIS, oceano, musica e pesquisa.
-- Integracao preparada com Vercel `/api/vocabulary`, `/api/sentence`, `/api/notes` e Notion, mantendo fallback local.
+- Integracao preparada com Vercel `/api/vocabulary`, `/api/sentence`, `/api/notes`, `/api/music-list` e Notion, mantendo fallback local.
 
 ## Integracoes ativas
 
@@ -57,6 +57,7 @@ As palavras adicionadas pelo botao `Add Word`, a frase escrita em `Today's Sente
 - O app carrega palavras compartilhadas do Notion via `/api/vocabulary-list`.
 - `Today's Sentence` sincroniza com o Notion via `/api/sentence`.
 - `My Notes` e estudos musicais sincronizam com o Notion via `/api/notes` quando `NOTION_NOTES_DATA_SOURCE_ID` esta configurado.
+- A aba Music carrega estudos musicais compartilhados do Notion via `/api/music-list`.
 - Se a API falhar, o app preserva dados no navegador usando `localStorage`.
 - O app pode ser instalado como PWA em navegadores compativeis.
 - O endpoint de vocabulario tolera colunas ausentes no Notion e salva os detalhes no corpo da pagina.

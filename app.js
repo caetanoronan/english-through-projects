@@ -4,6 +4,7 @@ const onlineVocabularyEndpoint = window.APP_VOCABULARY_ENDPOINT || "https://engl
 const onlineVocabularyListEndpoint = window.APP_VOCABULARY_LIST_ENDPOINT || "https://english-through-projects.vercel.app/api/vocabulary-list";
 const onlineSentenceEndpoint = window.APP_SENTENCE_ENDPOINT || "https://english-through-projects.vercel.app/api/sentence";
 const onlineNotesEndpoint = window.APP_NOTES_ENDPOINT || "https://english-through-projects.vercel.app/api/notes";
+const onlineMusicListEndpoint = window.APP_MUSIC_LIST_ENDPOINT || "https://english-through-projects.vercel.app/api/music-list";
 const todayKey = new Date().toISOString().slice(0, 10);
 
 let words = [];
@@ -58,6 +59,7 @@ const defaultState = {
   pendingSyncSentences: [],
   pendingSyncNotes: [],
   onlineWords: [],
+  onlineSongs: [],
   userSongs: [],
   dailySentence: "",
   musicNotes: "",
@@ -75,18 +77,20 @@ async function startApp() {
 }
 
 async function loadContent() {
-  const [baseWords, baseReadings, baseFlashcards, baseSongs, onlineWords] = await Promise.all([
+  const [baseWords, baseReadings, baseFlashcards, baseSongs, onlineWords, onlineSongs] = await Promise.all([
     loadJson("data/vocabulary.json", fallbackData.words),
     loadJson("data/readings.json", fallbackData.readings),
     loadJson("data/flashcards.json", fallbackData.flashcards),
     loadJson("data/music.json", fallbackData.songs),
     loadOnlineVocabulary(),
+    loadOnlineMusic(),
   ]);
 
   state.onlineWords = onlineWords;
+  state.onlineSongs = onlineSongs;
   words = mergeVocabulary(baseWords, onlineWords, state.userWords);
   readings = baseReadings;
-  songs = [...baseSongs, ...(state.userSongs || []).map(normalizeImportedSong).filter(Boolean)];
+  songs = mergeSongs(baseSongs, onlineSongs, state.userSongs);
   flashcards = words.map((word) => ({
     front: word.term,
     back: `${word.translation || "Sem traducao"}: ${word.meaning}`,
@@ -110,6 +114,21 @@ async function loadOnlineVocabulary() {
     return result.words;
   } catch (error) {
     return state.onlineWords || [];
+  }
+}
+
+async function loadOnlineMusic() {
+  try {
+    const response = await fetch(onlineMusicListEndpoint);
+    const result = await response.json();
+
+    if (!response.ok || !result.ok || !Array.isArray(result.songs)) {
+      throw new Error(result.message || "Could not load online music");
+    }
+
+    return result.songs;
+  } catch (error) {
+    return state.onlineSongs || [];
   }
 }
 
@@ -142,6 +161,30 @@ function mergeVocabulary(...groups) {
   });
 
   return mergedWords;
+}
+
+function mergeSongs(...groups) {
+  const seenTitles = new Set();
+  const mergedSongs = [];
+
+  groups.flat().forEach((song) => {
+    const normalizedSong = normalizeImportedSong(song);
+
+    if (!normalizedSong) {
+      return;
+    }
+
+    const key = normalizedSong.title.toLowerCase();
+
+    if (seenTitles.has(key)) {
+      return;
+    }
+
+    seenTitles.add(key);
+    mergedSongs.push(normalizedSong);
+  });
+
+  return mergedSongs;
 }
 
 async function loadJson(path, fallback) {
@@ -179,6 +222,7 @@ function loadState() {
       pendingSyncSentences: saved.pendingSyncSentences || [],
       pendingSyncNotes: saved.pendingSyncNotes || [],
       onlineWords: saved.onlineWords || [],
+      onlineSongs: saved.onlineSongs || [],
       userSongs: saved.userSongs || [],
       generalNotes: saved.generalNotes || "",
     };
@@ -192,6 +236,7 @@ function loadState() {
     pendingSyncSentences: saved.pendingSyncSentences || [],
     pendingSyncNotes: saved.pendingSyncNotes || [],
     onlineWords: saved.onlineWords || [],
+    onlineSongs: saved.onlineSongs || [],
     userSongs: saved.userSongs || [],
   };
 }
