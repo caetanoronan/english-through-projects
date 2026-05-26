@@ -36,6 +36,7 @@ As palavras adicionadas pelo botao `Add Word`, a frase escrita em `Today's Sente
 - Sugestao simples de correcao comparando a palavra digitada com o vocabulario existente.
 - Leitura em voz alta com a Web Speech API do navegador.
 - Aba Music com song study cards, versos originais, links de estudo, links para ouvir e cadastro de novas musicas.
+- O campo `Useful vocabulary` da musica tambem cria palavras no `Vocabulary Bank`.
 - Aba Reading com `Listen` e `Record voice` para comparar sua fala com o texto.
 - Layout responsivo com grids fluidos, tema claro/escuro e titulos com gradiente colorido.
 - Fundo visual inspirado nos temas do projeto: ingles, codigo, GIS, oceano, musica e pesquisa.

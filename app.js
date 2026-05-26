@@ -649,7 +649,7 @@ function addWord() {
   syncVocabularyWord(newWord);
 }
 
-async function syncVocabularyWord(word) {
+async function syncVocabularyWord(word, showStatus = true) {
   try {
     const response = await fetch(onlineVocabularyEndpoint, {
       method: "POST",
@@ -662,7 +662,9 @@ async function syncVocabularyWord(word) {
       throw new Error(result.message || "Online sync failed");
     }
 
-    showToast("Word synced with Notion");
+    if (showStatus) {
+      showToast("Word synced with Notion");
+    }
   } catch (error) {
     const alreadyPending = state.pendingSyncWords.some(
       (pendingWord) => pendingWord.term.toLowerCase() === word.term.toLowerCase(),
@@ -673,7 +675,9 @@ async function syncVocabularyWord(word) {
       localStorage.setItem(storageKey, JSON.stringify(state));
     }
 
-    showToast("Saved locally. Notion sync pending.");
+    if (showStatus) {
+      showToast("Saved locally. Notion sync pending.");
+    }
   }
 }
 
@@ -744,6 +748,7 @@ function addMusicStudy() {
   state.userSongs.push(newSong);
   songs.push(newSong);
   state.musicIndex = songs.length - 1;
+  addMusicVocabularyToBank(newSong);
 
   document.querySelector("#addMusicTitle").value = "";
   document.querySelector("#addMusicStyle").value = "";
@@ -766,6 +771,47 @@ function addMusicStudy() {
     link: newSong.studyLink,
     audioLink: newSong.audioLink,
   });
+}
+
+function addMusicVocabularyToBank(song) {
+  const newWords = song.vocabulary
+    .map((term) => ({
+      term: normalizeSpaces(term),
+      tag: "Music",
+      meaning: `A useful word or expression from the song "${song.title}".`,
+      translation: "",
+      example: song.lines[0] || `I noticed "${term}" while studying "${song.title}".`,
+    }))
+    .filter((word) => word.term);
+
+  const existingTerms = new Set(words.map((word) => word.term.toLowerCase()));
+  const uniqueWords = newWords.filter((word) => {
+    const key = word.term.toLowerCase();
+
+    if (existingTerms.has(key)) {
+      return false;
+    }
+
+    existingTerms.add(key);
+    return true;
+  });
+
+  if (!uniqueWords.length) {
+    return;
+  }
+
+  state.userWords.push(...uniqueWords);
+  words.push(...uniqueWords);
+  flashcards.push(
+    ...uniqueWords.map((word) => ({
+      front: word.term,
+      back: `${word.translation || "Sem traducao"}: ${word.meaning}`,
+      category: word.tag,
+    })),
+  );
+
+  uniqueWords.forEach((word) => syncVocabularyWord(word, false));
+  showToast(`${uniqueWords.length} music words added to Vocabulary Bank`);
 }
 
 async function syncNote(noteInput) {

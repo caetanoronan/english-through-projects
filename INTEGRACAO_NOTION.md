@@ -49,7 +49,7 @@ Se o projeto na Vercel tiver outro nome de dominio, defina o endpoint antes de c
 </script>
 ```
 
-O app tenta enviar novas palavras, a frase diaria, notas gerais e estudos musicais para esses endpoints. Ao abrir, tambem busca palavras compartilhadas no Notion via `/api/vocabulary-list` e musicas compartilhadas via `/api/music-list`. Se algum endpoint ainda nao estiver configurado, o conteudo continua salvo localmente no navegador.
+O app tenta enviar novas palavras, a frase diaria, notas gerais e estudos musicais para esses endpoints. Ao cadastrar uma musica, o campo `Useful vocabulary` tambem cria entradas no `Vocabulary Bank`. Ao abrir, tambem busca palavras compartilhadas no Notion via `/api/vocabulary-list` e musicas compartilhadas via `/api/music-list`. Se algum endpoint ainda nao estiver configurado, o conteudo continua salvo localmente no navegador.
 
 ## Variaveis secretas na Vercel
 
