@@ -1,4 +1,4 @@
-const CACHE_NAME = "english-through-projects-v2";
+const CACHE_NAME = "english-through-projects-v3";
 
 const APP_SHELL = [
   "./",
@@ -52,23 +52,17 @@ self.addEventListener("fetch", (event) => {
   }
 
   event.respondWith(
-    caches.match(request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-
-      return fetch(request)
-        .then((response) => {
-          if (!response || response.status !== 200 || response.type === "opaque") {
-            return response;
-          }
-
-          const responseToCache = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, responseToCache));
-
+    fetch(request)
+      .then((response) => {
+        if (!response || response.status !== 200 || response.type === "opaque") {
           return response;
-        })
-        .catch(() => caches.match("./index.html"));
-    })
+        }
+
+        const responseToCache = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(request, responseToCache));
+
+        return response;
+      })
+      .catch(() => caches.match(request).then((cachedResponse) => cachedResponse || caches.match("./index.html")))
   );
 });
